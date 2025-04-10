@@ -1,27 +1,27 @@
 #include "App.hpp"
+#include "SDL.h"
 
-#include "Core/Context.hpp"
-
-int main(int, char**) {
-    auto context = Core::Context::GetInstance();
+int main(int argc, char* argv[]) {
     App app;
+    app.InitSDL(); // 初始化 SDL
+    app.LoadTextures(); // 載入圖片
 
-    while (!context->GetExit()) {
+    while (app.GetCurrentState() != App::State::END) {
         switch (app.GetCurrentState()) {
-            case App::State::START:
-                app.Start();
-                break;
-
-            case App::State::UPDATE:
-                app.Update();
-                break;
-
-            case App::State::END:
-                app.End();
-                context->SetExit(true);
-                break;
+        case App::State::START:
+            app.Start();
+            break;
+        case App::State::UPDATE:
+            app.Update();
+            app.Render();
+            break;
+        case App::State::END:
+            app.End(); // 清理資源
+            break;
+        default:
+            break;
         }
-        context->Update();
     }
+
     return 0;
 }
