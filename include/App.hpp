@@ -22,6 +22,7 @@ public:
     void Update();
     void Render();
     void End();
+    void MoveMan(const glm::vec2& direction, int textureIndex);
 
     State GetCurrentState() const { return m_CurrentState; }
 

@@ -37,7 +37,6 @@ add_executable(${PROJECT_NAME}
     ${HEADER_FILES}
         src/AppRender.cpp
 )
-
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /W4)
 else()

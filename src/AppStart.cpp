@@ -3,27 +3,77 @@
 #include <SDL_image.h>
 
 void App::InitSDL() {
-    SDL_Init(SDL_INIT_VIDEO);
-    m_Window = SDL_CreateWindow("App", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
+        exit(1);
+    }
+
+    m_Window = SDL_CreateWindow("Game Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+    if (!m_Window) {
+        SDL_Log("Failed to create window: %s", SDL_GetError());
+        SDL_Quit();
+        exit(1);
+    }
+
     m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_ACCELERATED);
+    if (!m_Renderer) {
+        SDL_Log("Failed to create renderer: %s", SDL_GetError());
+        SDL_DestroyWindow(m_Window);
+        SDL_Quit();
+        exit(1);
+    }
 }
 
 void App::LoadTextures() {
-    SDL_Surface* surface = IMG_Load("Resource/character1.png");
+    SDL_Surface* surface = nullptr;
+
+    surface = IMG_Load("Resources/character1.png");
+    if (!surface) {
+        SDL_Log("Failed to load texture: %s", IMG_GetError());
+        return;
+    }
     m_Textures[0] = SDL_CreateTextureFromSurface(m_Renderer, surface);
     SDL_FreeSurface(surface);
 
-    surface = IMG_Load("Resource/character2.png");
+    if (!m_Textures[0]) {
+        SDL_Log("Failed to create texture: %s", SDL_GetError());
+    }
+
+    surface = IMG_Load("Resources/character2.png");
+    if (!surface) {
+        SDL_Log("Failed to load texture: %s", IMG_GetError());
+        return;
+    }
     m_Textures[1] = SDL_CreateTextureFromSurface(m_Renderer, surface);
     SDL_FreeSurface(surface);
 
-    surface = IMG_Load("Resource/character3.png");
+    if (!m_Textures[1]) {
+        SDL_Log("Failed to create texture: %s", SDL_GetError());
+    }
+
+    surface = IMG_Load("Resources/character3.png");
+    if (!surface) {
+        SDL_Log("Failed to load texture: %s", IMG_GetError());
+        return;
+    }
     m_Textures[2] = SDL_CreateTextureFromSurface(m_Renderer, surface);
     SDL_FreeSurface(surface);
 
-    surface = IMG_Load("Resource/character4.png");
+    if (!m_Textures[2]) {
+        SDL_Log("Failed to create texture: %s", SDL_GetError());
+    }
+
+    surface = IMG_Load("Resources/character4.png");
+    if (!surface) {
+        SDL_Log("Failed to load texture: %s", IMG_GetError());
+        return;
+    }
     m_Textures[3] = SDL_CreateTextureFromSurface(m_Renderer, surface);
     SDL_FreeSurface(surface);
+
+    if (!m_Textures[3]) {
+        SDL_Log("Failed to create texture: %s", SDL_GetError());
+    }
 }
 
 void App::Start() {

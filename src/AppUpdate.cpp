@@ -1,37 +1,43 @@
 #include "App.hpp"
-
 #include "Util/Keycode.hpp"
 #include "Util/Input.hpp"
 
-void App::Update() {
-    // 處理玩家移動
+void App::MoveMan(const glm::vec2& direction, int textureIndex) {
+    // 更新角色位置
     auto manPosition = m_man.GetPosition();
-    const float moveSpeed = 1.0f;
+    manPosition += direction;
+    m_man.SetPosition(manPosition);
 
-    SDL_Event event;
-    while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT) {
-            m_CurrentState = State::END; // 更新狀態為 END
-        }
-    }
+    // 更新當前顯示的圖片
+    m_CurrentTexture = m_Textures[textureIndex];
+}
 
-    if (Util::Input::IsKeyPressed(Util::Keycode::UP)) {
-        manPosition.y -= moveSpeed;
-        m_CurrentTexture = m_Textures[0]; // 顯示向上的圖片
-    }
+void App::Update() {
+    const float moveSpeed = 5.0f; // 移動速度
+    // 根據按鍵輸入移動角色
     if (Util::Input::IsKeyPressed(Util::Keycode::DOWN)) {
-        manPosition.y += moveSpeed;
-        m_CurrentTexture = m_Textures[1]; // 顯示向下的圖片
+        MoveMan({0, moveSpeed}, 0); // 向下移動
     }
-    if (Util::Input::IsKeyPressed(Util::Keycode::LEFT)) {
-        manPosition.x -= moveSpeed;
-        m_CurrentTexture = m_Textures[2]; // 顯示向左的圖片
+    if (Util::Input::IsKeyPressed(Util::Keycode::UP)) {
+        MoveMan({0, -moveSpeed}, 1); // 向上移動
     }
     if (Util::Input::IsKeyPressed(Util::Keycode::RIGHT)) {
-        manPosition.x += moveSpeed;
-        m_CurrentTexture = m_Textures[3]; // 顯示向右的圖片
+        MoveMan({moveSpeed, 0}, 2); // 向右移動
     }
-    m_man.SetPosition(manPosition);
+    if (Util::Input::IsKeyPressed(Util::Keycode::LEFT)) {
+        MoveMan({-moveSpeed, 0}, 3); // 向左移動
+    }
+
+    // 清除畫面
+    SDL_RenderClear(m_Renderer);
+
+    // 渲染角色
+    auto manPosition = m_man.GetPosition();
+    SDL_Rect dstRect = {static_cast<int>(manPosition.x), static_cast<int>(manPosition.y), 50, 50}; // 假設角色大小為 50x50
+    SDL_RenderCopy(m_Renderer, m_CurrentTexture, nullptr, &dstRect);
+
+    // 更新畫面
+    SDL_RenderPresent(m_Renderer);
 
     /*// 處理箱子推動邏輯
     for (auto& box : m_boxes) {
@@ -65,10 +71,10 @@ void App::Update() {
             m_CurrentState = State::START; // 切換到 START 狀態以初始化下一關
         }
     }
-
+*/
     // 跳轉至結束階段
-    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
+    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit())
+    {
         m_CurrentState = State::END;
     }
-    */
 }
