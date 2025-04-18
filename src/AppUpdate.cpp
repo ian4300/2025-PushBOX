@@ -1,3 +1,4 @@
+#include "iostream"
 #include "App.hpp"
 #include "Util/Input.hpp"
 #include "Util/GameObject.hpp"
@@ -15,45 +16,39 @@ man::man()
 void man::Update() {
     //移動邏輯
     if (Util::Input::IsKeyDown(Util::Keycode::DOWN)) {
+        if (m_Transform.translation.y - 75 >= -265) { // 檢查是否超出下邊界
+            m_Transform.translation.y -= 75;
+        }
         m_Image = std::make_shared<Util::Image>("Resources/character1.png");
         SetDrawable(m_Image);
-        m_Transform.translation.y -= 75;
     } else if (Util::Input::IsKeyDown(Util::Keycode::UP)) {
+        if (m_Transform.translation.y + 75 <= 335) { // 檢查是否超出上邊界
+            m_Transform.translation.y += 75;
+        }
         m_Image = std::make_shared<Util::Image>("Resources/character2.png");
         SetDrawable(m_Image);
-        m_Transform.translation.y += 75;
     } else if (Util::Input::IsKeyDown(Util::Keycode::LEFT)) {
+        if (m_Transform.translation.x - 75 >= -600) { // 檢查是否超出左邊界
+            m_Transform.translation.x -= 75;
+        }
         m_Image = std::make_shared<Util::Image>("Resources/character4.png");
         SetDrawable(m_Image);
-        m_Transform.translation.x -= 75;
     } else if (Util::Input::IsKeyDown(Util::Keycode::RIGHT)) {
+        if (m_Transform.translation.x + 75 <= 600) { // 檢查是否超出右邊界
+            m_Transform.translation.x += 75;
+        }
         m_Image = std::make_shared<Util::Image>("Resources/character3.png");
         SetDrawable(m_Image);
-        m_Transform.translation.x += 75;
     }
+      /*取地圖座標  std::cout << "Character Position: ("
+             << m_Transform.translation.x << ", "
+             << m_Transform.translation.y << ")" << std::endl;//地圖劃分左右x=+-600有16格,上下y=335~-265有8格*/
 }
 void App::Update()
 {
     m_man->Update();
+    m_Stage->Update();
     m_Root.Update();
-   /* if (Util::Input::IsKeyPressed(Util::Keycode::UP)) {
-        m_Transform.translation.y -= moveSpeed;
-    }
-    if (Util::Input::IsKeyPressed(Util::Keycode::DOWN)) {
-        m_Transform.translation.y += moveSpeed;
-    }
-    if (Util::Input::IsKeyPressed(Util::Keycode::LEFT)) {
-        m_Transform.translation.x -= moveSpeed;
-    }
-    if (Util::Input::IsKeyPressed(Util::Keycode::RIGHT)) {
-        m_Transform.translation.x += moveSpeed;
-    }
-    m_man.SetPosition(manPosition);
-
-
-    // 渲染角色
-
-*/
     /*// 處理箱子推動邏輯
     for (auto& box : m_boxes) {
         if (box.IsCollidingWith(m_man)) {

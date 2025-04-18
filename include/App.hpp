@@ -17,6 +17,14 @@ private:
     std::shared_ptr<Util::Image> m_Image;
 
 };
+class Stage : public Util::GameObject {
+public:
+    Stage();
+    void Update();
+
+private:
+    std::shared_ptr<Util::Image> m_BackgroundImage;
+};
 class App {
 public:
     enum class State {
@@ -51,6 +59,8 @@ private:
     Util::Renderer m_Root;
 
     std::shared_ptr<man> m_man = std::make_shared<man>();
+
+    std::shared_ptr<Stage> m_Stage = std::make_shared<Stage>();
 
     std::shared_ptr<PhaseResourceManger> m_PRM;
     bool m_EnterDown = false;

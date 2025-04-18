@@ -1,6 +1,5 @@
 #include "App.hpp"
 #include "Util/Logger.hpp"
-#include "Character.hpp"
 #include "Util/Image.hpp"
 #include <SDL_image.h>
 
@@ -25,7 +24,6 @@
         exit(1);
     }
 }
-/*
 void App::LoadTextures() {
     SDL_Surface* surface = nullptr;
 
@@ -55,7 +53,10 @@ void Character::SetImage(const std::string& ImagePath) {
 }*/
 void App::Start() {
     LOG_TRACE("Start");
+
     m_Root.AddChild(m_man);
+    m_Root.AddChild(m_Stage);
     m_man->SetVisible(true);
+    m_Stage->SetVisible(true);
     m_CurrentState = State::UPDATE;
 }
