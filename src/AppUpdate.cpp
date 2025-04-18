@@ -1,44 +1,59 @@
 #include "App.hpp"
-#include "Util/Keycode.hpp"
 #include "Util/Input.hpp"
+#include "Util/GameObject.hpp"
+#include "Util/Image.hpp"
+#include "Character.hpp"
 
-void App::MoveMan(const glm::vec2& direction, int textureIndex) {
-    // 更新角色位置
-    auto manPosition = m_man.GetPosition();
-    manPosition += direction;
-    m_man.SetPosition(manPosition);
-
-    // 更新當前顯示的圖片
-    m_CurrentTexture = m_Textures[textureIndex];
+man::man()
+    : m_Image(std::make_shared<Util::Image>("Resources/character1.png"))
+    {
+        m_Transform.scale = {1.00f, 1.00f};
+        m_Transform.translation = {0, 110};
+        SetDrawable(m_Image); // 設置單一圖片
+        SetZIndex(5);
 }
-
-void App::Update() {
-    const float moveSpeed = 5.0f; // 移動速度
-    // 根據按鍵輸入移動角色
+void man::Update() {
+    //移動邏輯
+    if (Util::Input::IsKeyDown(Util::Keycode::DOWN)) {
+        m_Image = std::make_shared<Util::Image>("Resources/character1.png");
+        SetDrawable(m_Image);
+        m_Transform.translation.y -= 75;
+    } else if (Util::Input::IsKeyDown(Util::Keycode::UP)) {
+        m_Image = std::make_shared<Util::Image>("Resources/character2.png");
+        SetDrawable(m_Image);
+        m_Transform.translation.y += 75;
+    } else if (Util::Input::IsKeyDown(Util::Keycode::LEFT)) {
+        m_Image = std::make_shared<Util::Image>("Resources/character4.png");
+        SetDrawable(m_Image);
+        m_Transform.translation.x -= 75;
+    } else if (Util::Input::IsKeyDown(Util::Keycode::RIGHT)) {
+        m_Image = std::make_shared<Util::Image>("Resources/character3.png");
+        SetDrawable(m_Image);
+        m_Transform.translation.x += 75;
+    }
+}
+void App::Update()
+{
+    m_man->Update();
+    m_Root.Update();
+   /* if (Util::Input::IsKeyPressed(Util::Keycode::UP)) {
+        m_Transform.translation.y -= moveSpeed;
+    }
     if (Util::Input::IsKeyPressed(Util::Keycode::DOWN)) {
-        MoveMan({0, moveSpeed}, 0); // 向下移動
-    }
-    if (Util::Input::IsKeyPressed(Util::Keycode::UP)) {
-        MoveMan({0, -moveSpeed}, 1); // 向上移動
-    }
-    if (Util::Input::IsKeyPressed(Util::Keycode::RIGHT)) {
-        MoveMan({moveSpeed, 0}, 2); // 向右移動
+        m_Transform.translation.y += moveSpeed;
     }
     if (Util::Input::IsKeyPressed(Util::Keycode::LEFT)) {
-        MoveMan({-moveSpeed, 0}, 3); // 向左移動
+        m_Transform.translation.x -= moveSpeed;
     }
+    if (Util::Input::IsKeyPressed(Util::Keycode::RIGHT)) {
+        m_Transform.translation.x += moveSpeed;
+    }
+    m_man.SetPosition(manPosition);
 
-    // 清除畫面
-    SDL_RenderClear(m_Renderer);
 
     // 渲染角色
-    auto manPosition = m_man.GetPosition();
-    SDL_Rect dstRect = {static_cast<int>(manPosition.x), static_cast<int>(manPosition.y), 50, 50}; // 假設角色大小為 50x50
-    SDL_RenderCopy(m_Renderer, m_CurrentTexture, nullptr, &dstRect);
 
-    // 更新畫面
-    SDL_RenderPresent(m_Renderer);
-
+*/
     /*// 處理箱子推動邏輯
     for (auto& box : m_boxes) {
         if (box.IsCollidingWith(m_man)) {

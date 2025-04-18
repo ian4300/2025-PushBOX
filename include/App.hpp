@@ -1,44 +1,59 @@
 #ifndef APP_HPP
 #define APP_HPP
 
-#include <vector>
-#include <SDL.h>
-#include "pch.hpp"
-#include "Character.hpp" // 玩家角色類
-#include "Box.hpp"       // 箱子類
-#include "Target.hpp"    // 目標區域類
+#include "pch.hpp" // IWYU pragma: export
 
+#include "Util/Renderer.hpp"
+#include "Character.hpp"
+#include "Util/Image.hpp"
+#include "PhaseResourceManger.hpp"
+#include "Util/GameObject.hpp"
+
+class man : public Util::GameObject {
+public:
+    man();
+    void Update();
+private:
+    std::shared_ptr<Util::Image> m_Image;
+
+};
 class App {
 public:
     enum class State {
         START,
         UPDATE,
-        END
+        END,
     };
-
-    void InitSDL(); // 新增初始化 SDL 的方法
-    void LoadTextures(); // 新增載入圖片的方法
-    void Start();
-    void Update();
-    void Render();
-    void End();
-    void MoveMan(const glm::vec2& direction, int textureIndex);
 
     State GetCurrentState() const { return m_CurrentState; }
 
-    void SetCurrentState(State state);
+    void Start();
+
+    void Update();
+
+    void End();
+
+    void Render();
 
 private:
-    State m_CurrentState = State::START;
-    int m_Phase = 1;
-    Character m_man;
-    std::vector<Box> m_boxes;
-    std::vector<Target> m_targets;
+    void ValidTask();
 
-    SDL_Window* m_Window = nullptr;
-    SDL_Renderer* m_Renderer = nullptr;
-    SDL_Texture* m_Textures[4] = {nullptr};
-    SDL_Texture* m_CurrentTexture = nullptr;
+private:
+
+    enum class Phase {
+        CHANGE_CHARACTER_IMAGE,
+        ABLE_TO_MOVE,
+        COLLIDE_DETECTION,
+    };
+    State m_CurrentState = State::START;
+    Phase m_Phase = Phase::CHANGE_CHARACTER_IMAGE;
+
+    Util::Renderer m_Root;
+
+    std::shared_ptr<man> m_man = std::make_shared<man>();
+
+    std::shared_ptr<PhaseResourceManger> m_PRM;
+    bool m_EnterDown = false;
 };
 
-#endif // APP_HPP
+#endif

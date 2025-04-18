@@ -36,6 +36,7 @@ add_executable(${PROJECT_NAME}
     ${SRC_FILES}
     ${HEADER_FILES}
         src/AppRender.cpp
+        include/BackgroundImage.hpp
 )
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /W4)

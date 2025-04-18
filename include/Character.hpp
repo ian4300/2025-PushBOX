@@ -1,16 +1,41 @@
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
-#include "pch.hpp"
-#include <glm/glm.hpp>
+#include <string>
 
-class Character {
+#include "Util/GameObject.hpp"
+
+class Character : public Util::GameObject {
 public:
-    void SetPosition(const glm::vec2& position) { m_position = position; }
-    glm::vec2 GetPosition() const { return m_position; }
+    explicit Character(const std::string& ImagePath);
+
+    Character(const Character&) = delete;
+
+    Character(Character&&) = delete;
+
+    Character& operator=(const Character&) = delete;
+
+    Character& operator=(Character&&) = delete;
+
+    [[nodiscard]] const std::string& GetImagePath() const { return m_ImagePath; }
+
+    [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
+
+    void SetImage(const std::string& ImagePath);
+
+    void SetPosition(const glm::vec2& Position) { m_Transform.translation = Position; }
+
+    // TODO: Implement the collision detection
+    [[nodiscard]] bool IfCollides(const std::shared_ptr<Character>& other) const {
+        (void) other;
+        return false;
+    }
+
+    // TODO: Add and implement more methods and properties as needed to finish Giraffe Adventure.
 
 private:
-    glm::vec2 m_position; // 玩家角色的位置
-};
+    void ResetPosition() { m_Transform.translation = {0, 0}; }
 
-#endif // CHARACTER_HPP
+    std::string m_ImagePath;
+};
+#endif //CHARACTER_HPP

@@ -5,7 +5,7 @@
 void App::End() {
     LOG_TRACE("End");
 
-    // 釋放所有加載的紋理
+    /*// 釋放所有加載的紋理
     for (auto& texture : m_Textures) {
         if (texture) {
             SDL_DestroyTexture(texture);
@@ -26,5 +26,5 @@ void App::End() {
     }
 
     // 關閉 SDL 子系統
-    SDL_Quit();
+    SDL_Quit();*/
 }
