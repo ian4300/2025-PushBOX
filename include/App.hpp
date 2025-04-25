@@ -4,10 +4,18 @@
 #include "pch.hpp" // IWYU pragma: export
 
 #include "Util/Renderer.hpp"
-#include "Character.hpp"
 #include "Util/Image.hpp"
 #include "PhaseResourceManger.hpp"
 #include "Util/GameObject.hpp"
+
+class Stage : public Util::GameObject {
+public:
+    Stage();
+    void Update();
+
+private:
+    std::shared_ptr<Util::Image> m_BackgroundImage;
+};
 
 class man : public Util::GameObject {
 public:
@@ -17,14 +25,16 @@ private:
     std::shared_ptr<Util::Image> m_Image;
 
 };
-class Stage : public Util::GameObject {
-public:
-    Stage();
-    void Update();
 
+class Box : public Util::GameObject {
+public:
+    Box();
+    void Update();
 private:
-    std::shared_ptr<Util::Image> m_BackgroundImage;
+    std::shared_ptr<Util::Image> m_Image;
+
 };
+
 class App {
 public:
     enum class State {
@@ -61,6 +71,8 @@ private:
     std::shared_ptr<man> m_man = std::make_shared<man>();
 
     std::shared_ptr<Stage> m_Stage = std::make_shared<Stage>();
+
+    std::shared_ptr<Box> m_box1 = std::make_shared<Box>();
 
     std::shared_ptr<PhaseResourceManger> m_PRM;
     bool m_EnterDown = false;

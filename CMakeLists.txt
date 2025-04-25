@@ -38,6 +38,7 @@ add_executable(${PROJECT_NAME}
         src/AppRender.cpp
         include/Stage.hpp
         src/Stage.cpp
+        src/Box.cpp
 )
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /W4)

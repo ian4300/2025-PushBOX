@@ -1,9 +1,7 @@
-#include "iostream"
 #include "App.hpp"
 #include "Util/Input.hpp"
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"
-#include "Character.hpp"
 
 man::man()
     : m_Image(std::make_shared<Util::Image>("Resources/character1.png"))

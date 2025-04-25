@@ -3,6 +3,17 @@
 #include "Util/Image.hpp"
 #include <SDL_image.h>
 
+void App::Start() {
+    LOG_TRACE("Start");
+
+    m_Root.AddChild(m_man);
+    m_Root.AddChild(m_Stage);
+    m_Root.AddChild(m_box1);
+    m_man->SetVisible(true);//腳色出現
+    m_Stage->SetVisible(true);//地圖出現
+    m_CurrentState = State::UPDATE;
+}
+//廢案
 /*  void App::InitSDL() {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
@@ -51,12 +62,3 @@ void Character::SetImage(const std::string& ImagePath) {
 
     m_Drawable = std::make_shared<Util::Image>(m_ImagePath);
 }*/
-void App::Start() {
-    LOG_TRACE("Start");
-
-    m_Root.AddChild(m_man);
-    m_Root.AddChild(m_Stage);
-    m_man->SetVisible(true);
-    m_Stage->SetVisible(true);
-    m_CurrentState = State::UPDATE;
-}

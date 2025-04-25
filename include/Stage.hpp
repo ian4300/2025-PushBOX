@@ -1,5 +1,5 @@
-#ifndef STAGE_H
-#define STAGE_H
+#ifndef STAGE_HPP
+#define STAGE_HPP
 
 #include "Util/Image.hpp"
 #include "Util/GameObject.hpp"
