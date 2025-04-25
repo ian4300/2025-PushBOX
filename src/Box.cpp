@@ -7,7 +7,7 @@ Box::Box()
     : m_Image(std::make_shared<Util::Image>("Resources/box.png"))
 {
     m_Transform.scale = {1.00f, 1.00f};
-    m_Transform.translation = {0, 110};
+    m_Transform.translation = {0, 185};
     SetDrawable(m_Image); // 設置單一圖片
     SetZIndex(4);
 }

@@ -40,7 +40,7 @@ void man::Update() {
     }
       /*取地圖座標  std::cout << "Character Position: ("
              << m_Transform.translation.x << ", "
-             << m_Transform.translation.y << ")" << std::endl;//地圖劃分左右x=+-600有16格,上下y=335~-265有8格*/
+             << m_Transform.translation.y << ")" << std::endl;//地圖劃分左右x=+-600有16格=75/格,上下y=335~-265有8格*/
 }
 void App::Update()
 {

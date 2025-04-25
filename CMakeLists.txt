@@ -36,7 +36,6 @@ add_executable(${PROJECT_NAME}
     ${SRC_FILES}
     ${HEADER_FILES}
         src/AppRender.cpp
-        include/Stage.hpp
         src/Stage.cpp
         src/Box.cpp
 )

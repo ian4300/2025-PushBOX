@@ -1,4 +1,4 @@
-#include "Stage.hpp"
+#include "App.hpp"
 #include "Util/Logger.hpp"
 #include "Util/Renderer.hpp"
 
