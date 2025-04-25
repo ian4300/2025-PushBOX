@@ -1,17 +1,65 @@
 #include "App.hpp"
 #include "Util/Logger.hpp"
 #include "Util/Image.hpp"
+#include "PhaseResourceManger.hpp"
 #include <SDL_image.h>
 
 void App::Start() {
     LOG_TRACE("Start");
+    if (m_PRM.GetPhase() < 4)
+    m_PRM.NextPhase();
+    else
+        m_CurrentState = State::END;
 
-    m_Root.AddChild(m_man);
-    m_Root.AddChild(m_Stage);
-    m_Root.AddChild(m_box1);
-    m_man->SetVisible(true);//腳色出現
-    m_Stage->SetVisible(true);//地圖出現
-    m_CurrentState = State::UPDATE;
+    if (m_PRM.GetPhase() == 1)
+    {
+        m_Root.AddChild(m_man);
+        m_Root.AddChild(m_Stage);
+        m_Root.AddChild(m_box1);
+        m_Root.AddChild(m_target1);
+        m_man->SetVisible(true);//腳色出現
+        m_Stage->SetVisible(true);//地圖出現
+        m_CurrentState = State::UPDATE;
+    }
+    //第二關初始化
+    if (m_PRM.GetPhase() == 2)
+    {
+        //初始化人位置
+        m_man->m_Transform.translation.x = 150;
+        m_man->m_Transform.translation.y = 110;
+        //初始化箱子1位置，創建箱子2
+        m_box1->m_Transform.translation.x = -150;
+        m_box1->m_Transform.translation.y = 110;
+        m_Root.AddChild(m_box2);
+        m_box2->m_Transform.translation.x = 75;
+        m_box2->m_Transform.translation.y = 110;
+        //初始化目標1位置
+        m_target1->m_Transform.translation.x = 0;
+        m_target1->m_Transform.translation.y = -115;
+
+        m_CurrentState = State::UPDATE;
+    }
+    //第三關初始化
+    if (m_PRM.GetPhase() == 3)
+    {
+        //初始化人位置
+        m_man->m_Transform.translation.x = 75;
+        m_man->m_Transform.translation.y = 35;
+        //初始化箱子1,2位置，創建箱子3
+        m_box1->m_Transform.translation.x = -150;
+        m_box1->m_Transform.translation.y = -190;
+        m_box2->m_Transform.translation.x = 75;
+        m_box2->m_Transform.translation.y = 110;
+        m_Root.AddChild(m_box3);
+        m_box3->m_Transform.translation.x = 300;
+        m_box3->m_Transform.translation.y = -115;
+
+        //初始化目標1位置
+        m_target1->m_Transform.translation.x = -225;
+        m_target1->m_Transform.translation.y = 35;
+
+        m_CurrentState = State::UPDATE;
+    }
 }
 //廢案
 /*  void App::InitSDL() {

@@ -6,7 +6,6 @@ int main(int argc, char* argv[])
 {
     auto context = Core::Context::GetInstance();
     App app;
-
     // set icon in window.
     context->SetWindowIcon("Resources/box.png");
 

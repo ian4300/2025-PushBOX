@@ -3,15 +3,15 @@
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"
 
-Box::Box()
-    : m_Image(std::make_shared<Util::Image>("Resources/box.png"))
+Target::Target()
+    : m_Image(std::make_shared<Util::Image>("Resources/point.png"))
 {
     m_Transform.scale = {1.00f, 1.00f};
-    m_Transform.translation = {0, 35};
+    m_Transform.translation = {300, 110};
     SetDrawable(m_Image); // 設置單一圖片
-    SetZIndex(4);
+    SetZIndex(2);
 }
 
-void Box::Update() {
+void Target::Update() {
 
 }

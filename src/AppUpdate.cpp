@@ -1,3 +1,4 @@
+#include "iostream"
 #include "App.hpp"
 #include "Util/Input.hpp"
 #include "Util/GameObject.hpp"
@@ -11,6 +12,7 @@ man::man()
         SetDrawable(m_Image); // 設置單一圖片
         SetZIndex(5);
 }
+
 void man::Update() {
     //移動邏輯
     if (Util::Input::IsKeyDown(Util::Keycode::DOWN)) {
@@ -38,7 +40,8 @@ void man::Update() {
         m_Image = std::make_shared<Util::Image>("Resources/character3.png");
         SetDrawable(m_Image);
     }
-      /*取地圖座標  std::cout << "Character Position: ("
+      /*取地圖座標
+      std::cout << "Character Position: ("
              << m_Transform.translation.x << ", "
              << m_Transform.translation.y << ")" << std::endl;//地圖劃分左右x=+-600有16格=75/格,上下y=335~-265有8格*/
 }
@@ -47,6 +50,29 @@ void App::Update()
     m_man->Update();
     m_Stage->Update();
     m_Root.Update();
+
+    // 切換關卡
+    if (m_PRM.GetPhase() == 1)
+    {
+        glm::vec2 manPosition = m_man->GetPosition();
+        if (manPosition.x == 300 && manPosition.y == 110) {
+            m_CurrentState = State::START;
+        }
+    }
+    if (m_PRM.GetPhase() == 2)
+    {
+        glm::vec2 manPosition = m_man->GetPosition();
+        if (manPosition.x == 0 && manPosition.y == -115) {
+            m_CurrentState = State::START;
+        }
+    }
+    if (m_PRM.GetPhase() == 3)
+    {
+        glm::vec2 manPosition = m_man->GetPosition();
+        if (manPosition.x == -225 && manPosition.y == 35) {
+            m_CurrentState = State::START;
+        }
+    }
     /*// 處理箱子推動邏輯
     for (auto& box : m_boxes) {
         if (box.IsCollidingWith(m_man)) {

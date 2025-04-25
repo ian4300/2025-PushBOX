@@ -2,7 +2,6 @@
 #define PHASE_MANGER_HPP
 
 #include "Util/GameObject.hpp"
-#include "Character.hpp"
 //#include "BackgroundImage.hpp"
 
 class PhaseResourceManger {
@@ -14,12 +13,13 @@ public:
     }
 */
     void NextPhase();
+    int GetPhase() const;
 
 private:
    /* std::shared_ptr<TaskText> m_TaskText;
     std::shared_ptr<BackgroundImage> m_Background;
  */
-    int m_Phase = 1;
+    int m_Phase = 0;
 };
 
 

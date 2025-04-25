@@ -21,6 +21,9 @@ class man : public Util::GameObject {
 public:
     man();
     void Update();
+    glm::vec2 GetPosition() const {
+        return m_Transform.translation;
+    }
 private:
     std::shared_ptr<Util::Image> m_Image;
 
@@ -28,7 +31,15 @@ private:
 
 class Box : public Util::GameObject {
 public:
-    Box();
+    Box(); // 新增構造函數
+    void Update();
+private:
+    std::shared_ptr<Util::Image> m_Image;
+
+};
+class Target : public Util::GameObject {
+public:
+    Target(); // 新增構造函數
     void Update();
 private:
     std::shared_ptr<Util::Image> m_Image;
@@ -45,6 +56,8 @@ public:
 
     State GetCurrentState() const { return m_CurrentState; }
 
+    App() : m_PRM() {};
+
     void Start();
 
     void Update();
@@ -55,9 +68,7 @@ public:
 
 private:
     void ValidTask();
-
-private:
-
+    PhaseResourceManger m_PRM;
     enum class Phase {
         CHANGE_CHARACTER_IMAGE,
         ABLE_TO_MOVE,
@@ -73,8 +84,11 @@ private:
     std::shared_ptr<Stage> m_Stage = std::make_shared<Stage>();
 
     std::shared_ptr<Box> m_box1 = std::make_shared<Box>();
+    std::shared_ptr<Box> m_box2 = std::make_shared<Box>();
+    std::shared_ptr<Box> m_box3 = std::make_shared<Box>();
 
-    std::shared_ptr<PhaseResourceManger> m_PRM;
+    std::shared_ptr<Target> m_target1 = std::make_shared<Target>();
+
     bool m_EnterDown = false;
 };
 
