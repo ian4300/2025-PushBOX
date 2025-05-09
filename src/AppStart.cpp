@@ -15,6 +15,7 @@ void App::Start() {
     {
         m_Root.AddChild(m_man);
         m_Root.AddChild(m_Stage);
+
         m_Root.AddChild(m_box1);
         m_Root.AddChild(m_box2);
         m_box2->SetVisible(false);
@@ -25,9 +26,13 @@ void App::Start() {
         m_Root.AddChild(m_box5);
         m_box5->SetVisible(false);
         m_Root.AddChild(m_target1);
-        /*m_man->SetVisible(true);//腳色出現
-        m_Stage->SetVisible(true);//地圖出現
-        */
+
+        m_box1->m_Transform.translation.x = -150;
+        m_box1->m_Transform.translation.y = 225;
+
+        m_target1->m_Transform.translation.x = 0;
+        m_target1->m_Transform.translation.y = -150;
+
         m_CurrentState = State::UPDATE;
     }
     //第二關初始化

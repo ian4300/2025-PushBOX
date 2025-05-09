@@ -16,11 +16,10 @@ public:
 private:
     std::shared_ptr<Util::Image> m_BackgroundImage;
 };
-
-class man : public Util::GameObject {
+class Box : public Util::GameObject {
 public:
-    man();
-    void Update(const std::vector<glm::vec2>& boxes);
+    Box(); // 新增構造函數
+    void Update();
     glm::vec2 GetPosition() const {
         return m_Transform.translation;
     }
@@ -28,11 +27,10 @@ private:
     std::shared_ptr<Util::Image> m_Image;
 
 };
-
-class Box : public Util::GameObject {
+class man : public Util::GameObject {
 public:
-    Box(); // 新增構造函數
-    void Update();
+    man();
+    void Update(const std::vector<std::shared_ptr<Box>>& boxes , int phase);
     glm::vec2 GetPosition() const {
         return m_Transform.translation;
     }
@@ -52,7 +50,7 @@ private:
 class Impact {
 public:
     Impact();
-    bool CheckBoxCollision(const glm::vec2& currentBoxPosition, const std::vector<glm::vec2>& otherBoxes, int direction);
+    bool CheckBoxCollision(const glm::vec2& currentBoxPosition, const std::vector<glm::vec2>& otherBoxes, int direction ,int phase);
 };
 
 class App {

@@ -13,98 +13,88 @@ man::man()
         SetZIndex(5);
 }
 
-void man::Update(const std::vector<glm::vec2>& boxes)
+void man::Update(const std::vector<std::shared_ptr<Box>>& boxes, int phase)
 {
     Impact impact;
     int direction = 0;
-    //移動邏輯
+
+    // 移動邏輯
     if (Util::Input::IsKeyDown(Util::Keycode::DOWN)) {
-        if (m_Transform.translation.y - 75 >= -300) { // 檢查是否超出下邊界
+        if (m_Transform.translation.y - 75 >= -300) {
             m_Transform.translation.y -= 75;
         }
         direction = 2;
         SetDrawable(m_Image);
-
     } else if (Util::Input::IsKeyDown(Util::Keycode::UP)) {
-        if (m_Transform.translation.y + 75 <= 300) { // 檢查是否超出上邊界
+        if (m_Transform.translation.y + 75 <= 300) {
             m_Transform.translation.y += 75;
         }
         direction = 8;
         SetDrawable(m_Image);
     } else if (Util::Input::IsKeyDown(Util::Keycode::LEFT)) {
-        if (m_Transform.translation.x - 75 >= -600) { // 檢查是否超出左邊界
+        if (m_Transform.translation.x - 75 >= -600) {
             m_Transform.translation.x -= 75;
         }
         direction = 4;
         m_Transform.scale.x = -0.7f;
         SetDrawable(m_Image);
     } else if (Util::Input::IsKeyDown(Util::Keycode::RIGHT)) {
-        if (m_Transform.translation.x + 75 <= 600) { // 檢查是否超出右邊界
+        if (m_Transform.translation.x + 75 <= 600) {
             m_Transform.translation.x += 75;
         }
         direction = 6;
         m_Transform.scale.x = 0.7f;
         SetDrawable(m_Image);
     }
+
     glm::vec2 newPosition = m_Transform.translation;
-    // 呼叫碰撞檢測
-    for (const auto& box : boxes)
-    {
-        if (newPosition == box) {
-            // 呼叫碰撞檢測函式
-            if (impact.CheckBoxCollision(box, boxes, direction)) {
-                // 更新箱子位置
+
+    // 提取箱子座標
+    std::vector<glm::vec2> boxPositions;
+    for (const auto& box : boxes) {
+        boxPositions.push_back(box->GetPosition());
+    }
+
+    // 碰撞檢測
+    for (const auto& box : boxes) {
+        if (newPosition == box->GetPosition()) {
+            if (impact.CheckBoxCollision(box->GetPosition(), boxPositions, direction , phase)) {
+                // 還原角色位置
                 switch (direction) {
-                case 8: m_Transform.translation.y -= 75; break; // 上
-                case 2: m_Transform.translation.y += 75; break; // 下
-                case 4: m_Transform.translation.x += 75; break; // 左
-                case 6: m_Transform.translation.x -= 75; break; // 右
+                case 8: m_Transform.translation.y -= 75; break;
+                case 2: m_Transform.translation.y += 75; break;
+                case 4: m_Transform.translation.x += 75; break;
+                case 6: m_Transform.translation.x -= 75; break;
                 }
                 SDL_Log("Invalid position detected!");
             } else {
+                // 更新箱子位置
                 switch (direction) {
-                case 8: // 上
-                    const_cast<glm::vec2&>(box).y += 75;
-                    break;
-                case 2: // 下
-                    const_cast<glm::vec2&>(box).y -= 75;
-                    break;
-                case 4: // 左
-                    const_cast<glm::vec2&>(box).x -= 75;
-                    break;
-                case 6: // 右
-                    const_cast<glm::vec2&>(box).x += 75;
-                    break;
+                case 8: box->m_Transform.translation.y += 75; break;
+                case 2: box->m_Transform.translation.y -= 75; break;
+                case 4: box->m_Transform.translation.x -= 75; break;
+                case 6: box->m_Transform.translation.x += 75; break;
                 }
-                SDL_Log("Invalid position detected!");
+                SDL_Log("Box moved!");
             }
-            /*取地圖座標
-            std::cout << "Character Position: ("
-                   << m_Transform.translation.x << ", "
-                   << m_Transform.translation.y << ")" << std::endl;//地圖劃分左右x=+-600有16格=75/格,上下y=335~-265有8格*/
         }
     }
 }
 void App::Update()
 {
-    std::vector<glm::vec2> boxes;
+    int finishtarget[6] = {0, 0, 0, 0, 0};
+    std::vector<std::shared_ptr<Box>> boxes = {m_box1, m_box2, m_box3, m_box4, m_box5};
     // 收集所有箱子的座標
-    boxes.push_back(m_box1->GetPosition());
-    boxes.push_back(m_box2->GetPosition());
-    boxes.push_back(m_box3->GetPosition());
-    boxes.push_back(m_box4->GetPosition());
-    boxes.push_back(m_box5->GetPosition());
-
-    m_man->Update(boxes);
+    m_man->Update(boxes,m_PRM.GetPhase());
     m_Stage->Update();
     m_Root.Update();
     // 切換關卡
     if (m_PRM.GetPhase() == 1)
     {
-        glm::vec2 manPosition = m_man->GetPosition();
-        if (manPosition.x == 300 && manPosition.y == 150) {
+        if (m_target1->m_Transform.translation == m_box1->m_Transform.translation) {
             m_CurrentState = State::START;
         }
+
     }
     if (m_PRM.GetPhase() == 2)
     {

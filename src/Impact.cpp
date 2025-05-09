@@ -7,7 +7,7 @@ Impact::Impact() {
 }
 
 // 檢測箱子是否碰撞到其他箱子或邊界
-bool Impact::CheckBoxCollision(const glm::vec2& currentBoxPosition, const std::vector<glm::vec2>& otherBoxes, int direction) {
+bool Impact::CheckBoxCollision(const glm::vec2& currentBoxPosition, const std::vector<glm::vec2>& otherBoxes, int direction ,int phase) {
     glm::vec2 newBoxPosition = currentBoxPosition;
 
     // 根據方向計算新位置
