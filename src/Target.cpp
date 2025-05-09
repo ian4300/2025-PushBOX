@@ -6,7 +6,7 @@
 Target::Target()
     : m_Image(std::make_shared<Util::Image>("Resources/point.png"))
 {
-    m_Transform.scale = {1.00f, 1.00f};
+    m_Transform.scale = {0.7f, 0.7f};
     m_Transform.translation = {300, 110};
     SetDrawable(m_Image); // 設置單一圖片
     SetZIndex(2);

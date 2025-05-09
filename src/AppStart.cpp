@@ -16,26 +16,35 @@ void App::Start() {
         m_Root.AddChild(m_man);
         m_Root.AddChild(m_Stage);
         m_Root.AddChild(m_box1);
+        m_Root.AddChild(m_box2);
+        m_box2->SetVisible(false);
+        m_Root.AddChild(m_box3);
+        m_box3->SetVisible(false);
+        m_Root.AddChild(m_box4);
+        m_box4->SetVisible(false);
+        m_Root.AddChild(m_box5);
+        m_box5->SetVisible(false);
         m_Root.AddChild(m_target1);
-        m_man->SetVisible(true);//腳色出現
+        /*m_man->SetVisible(true);//腳色出現
         m_Stage->SetVisible(true);//地圖出現
+        */
         m_CurrentState = State::UPDATE;
     }
     //第二關初始化
     if (m_PRM.GetPhase() == 2)
     {
         //初始化人位置
-        m_man->m_Transform.translation.x = 150;
-        m_man->m_Transform.translation.y = 110;
+        m_man->m_Transform.translation.x = 300;
+        m_man->m_Transform.translation.y = 75;
         //初始化箱子1位置，創建箱子2
         m_box1->m_Transform.translation.x = -150;
-        m_box1->m_Transform.translation.y = 110;
-        m_Root.AddChild(m_box2);
+        m_box1->m_Transform.translation.y = 300;
+        m_box2->SetVisible(true);
         m_box2->m_Transform.translation.x = 75;
-        m_box2->m_Transform.translation.y = 110;
+        m_box2->m_Transform.translation.y = 75;
         //初始化目標1位置
         m_target1->m_Transform.translation.x = 0;
-        m_target1->m_Transform.translation.y = -115;
+        m_target1->m_Transform.translation.y = -150;
 
         m_CurrentState = State::UPDATE;
     }
@@ -44,19 +53,19 @@ void App::Start() {
     {
         //初始化人位置
         m_man->m_Transform.translation.x = 75;
-        m_man->m_Transform.translation.y = 35;
+        m_man->m_Transform.translation.y = 0;
         //初始化箱子1,2位置，創建箱子3
         m_box1->m_Transform.translation.x = -150;
-        m_box1->m_Transform.translation.y = -190;
+        m_box1->m_Transform.translation.y = -225;
         m_box2->m_Transform.translation.x = 75;
-        m_box2->m_Transform.translation.y = 110;
-        m_Root.AddChild(m_box3);
+        m_box2->m_Transform.translation.y = 150;
+        m_box3->SetVisible(true);
         m_box3->m_Transform.translation.x = 300;
-        m_box3->m_Transform.translation.y = -115;
+        m_box3->m_Transform.translation.y = -150;
 
         //初始化目標1位置
         m_target1->m_Transform.translation.x = -225;
-        m_target1->m_Transform.translation.y = 35;
+        m_target1->m_Transform.translation.y = 75;
 
         m_CurrentState = State::UPDATE;
     }

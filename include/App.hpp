@@ -20,7 +20,7 @@ private:
 class man : public Util::GameObject {
 public:
     man();
-    void Update();
+    void Update(const std::vector<glm::vec2>& boxes);
     glm::vec2 GetPosition() const {
         return m_Transform.translation;
     }
@@ -33,6 +33,9 @@ class Box : public Util::GameObject {
 public:
     Box(); // 新增構造函數
     void Update();
+    glm::vec2 GetPosition() const {
+        return m_Transform.translation;
+    }
 private:
     std::shared_ptr<Util::Image> m_Image;
 
@@ -44,6 +47,12 @@ public:
 private:
     std::shared_ptr<Util::Image> m_Image;
 
+};
+
+class Impact {
+public:
+    Impact();
+    bool CheckBoxCollision(const glm::vec2& currentBoxPosition, const std::vector<glm::vec2>& otherBoxes, int direction);
 };
 
 class App {
@@ -86,6 +95,8 @@ private:
     std::shared_ptr<Box> m_box1 = std::make_shared<Box>();
     std::shared_ptr<Box> m_box2 = std::make_shared<Box>();
     std::shared_ptr<Box> m_box3 = std::make_shared<Box>();
+    std::shared_ptr<Box> m_box4 = std::make_shared<Box>();
+    std::shared_ptr<Box> m_box5 = std::make_shared<Box>();
 
     std::shared_ptr<Target> m_target1 = std::make_shared<Target>();
 
