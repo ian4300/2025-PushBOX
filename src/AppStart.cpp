@@ -14,6 +14,18 @@ void App::Start() {
     // 將 finishtarget 陣列重置為 0
     std::fill(std::begin(finishtarget), std::end(finishtarget), 0);
 
+    // 根據 Phase 切換地圖
+    int phase = m_PRM.GetPhase();
+    if (phase >= 7 && phase <= 12) {
+        m_Stage->SetBackgroundImage("Resources/map2.png");
+    } else if (phase >= 13 && phase <= 18) {
+        m_Stage->SetBackgroundImage("Resources/map3.png");
+    } else if (phase >= 19 && phase <= 24) {
+        m_Stage->SetBackgroundImage("Resources/map4.png");
+    } else if (phase >= 25 && phase <= 30) {
+        m_Stage->SetBackgroundImage("Resources/map5.png");
+    }
+
     if (m_PRM.GetPhase() == 1)
     {
         m_Root.AddChild(m_man);
@@ -39,11 +51,14 @@ void App::Start() {
         m_Root.AddChild(m_target5);
         m_target2->SetVisible(false);
 
-        m_box1->m_Transform.translation.x = -150;
-        m_box1->m_Transform.translation.y = 225;
+        m_man->m_Transform.translation.x = 50;
+        m_man->m_Transform.translation.y = 0;
 
-        m_target1->m_Transform.translation.x = 0;
-        m_target1->m_Transform.translation.y = -150;
+        m_box1->m_Transform.translation.x = -50;
+        m_box1->m_Transform.translation.y = 100;
+
+        m_target1->m_Transform.translation.x = 50;
+        m_target1->m_Transform.translation.y = -200;
 
         m_CurrentState = State::UPDATE;
     }
@@ -51,20 +66,20 @@ void App::Start() {
     if (m_PRM.GetPhase() == 2)
     {
         //初始化人位置
-        m_man->m_Transform.translation.x = 300;
-        m_man->m_Transform.translation.y = 75;
+        m_man->m_Transform.translation.x = 250;
+        m_man->m_Transform.translation.y = 0;
         //初始化箱子1,2位置，顯示箱子2
         m_box1->m_Transform.translation.x = -150;
-        m_box1->m_Transform.translation.y = 225;
+        m_box1->m_Transform.translation.y = 100;
         m_box2->SetVisible(true);
-        m_box2->m_Transform.translation.x = 75;
-        m_box2->m_Transform.translation.y = 75;
+        m_box2->m_Transform.translation.x = 50;
+        m_box2->m_Transform.translation.y = 100;
         //初始化目標1,2位置，顯示目標2
-        m_target1->m_Transform.translation.x = 0;
-        m_target1->m_Transform.translation.y = -150;
+        m_target1->m_Transform.translation.x = 50;
+        m_target1->m_Transform.translation.y = -100;
         m_target2->SetVisible(true);
-        m_target2->m_Transform.translation.x = 300;
-        m_target2->m_Transform.translation.y = 150;
+        m_target2->m_Transform.translation.x = 250;
+        m_target2->m_Transform.translation.y = 100;
 
         m_CurrentState = State::UPDATE;
     }
@@ -72,25 +87,25 @@ void App::Start() {
     if (m_PRM.GetPhase() == 3)
     {
         //初始化人位置
-        m_man->m_Transform.translation.x = 75;
-        m_man->m_Transform.translation.y = 0;
+        m_man->m_Transform.translation.x = 50;
+        m_man->m_Transform.translation.y = 100;
         //初始化箱子1,2位置，顯示箱子3
         m_box1->m_Transform.translation.x = -150;
-        m_box1->m_Transform.translation.y = -225;
-        m_box2->m_Transform.translation.x = 75;
-        m_box2->m_Transform.translation.y = 150;
+        m_box1->m_Transform.translation.y = -200;
+        m_box2->m_Transform.translation.x = -150;
+        m_box2->m_Transform.translation.y = 100;
         m_box3->SetVisible(true);
-        m_box3->m_Transform.translation.x = 225;
-        m_box3->m_Transform.translation.y = -150;
+        m_box3->m_Transform.translation.x = 250;
+        m_box3->m_Transform.translation.y = -100;
 
         //初始化目標1,2,3位置，顯示目標3
-        m_target1->m_Transform.translation.x = 225;
-        m_target1->m_Transform.translation.y = -75;
-        m_target2->m_Transform.translation.x = 300;
-        m_target2->m_Transform.translation.y = 150;
+        m_target1->m_Transform.translation.x = 250;
+        m_target1->m_Transform.translation.y = 100;
+        m_target2->m_Transform.translation.x = 150;
+        m_target2->m_Transform.translation.y = 100;
         m_target3->SetVisible(true);
-        m_target3->m_Transform.translation.x = -300;
-        m_target3->m_Transform.translation.y = 150;
+        m_target3->m_Transform.translation.x = -250;
+        m_target3->m_Transform.translation.y = -200;
 
         m_CurrentState = State::UPDATE;
     }

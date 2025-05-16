@@ -7,8 +7,8 @@
 man::man()
     : m_Image(std::make_shared<Util::Image>("Resources/character1.png"))
     {
-        m_Transform.scale = {0.7f, 0.7f};
-        m_Transform.translation = {0, 0};
+        m_Transform.scale = {1.0f, 1.0f};
+        m_Transform.translation = {50, 0};
         SetDrawable(m_Image); // 設置單一圖片
         SetZIndex(5);
 }
@@ -20,30 +20,30 @@ void man::Update(const std::vector<std::shared_ptr<Box>>& boxes, int phase)
 
     // 移動邏輯
     if (Util::Input::IsKeyDown(Util::Keycode::DOWN)) {
-        if (m_Transform.translation.y - 75 >= -300) {
-            m_Transform.translation.y -= 75;
+        if (m_Transform.translation.y - 100 >= -200) {
+            m_Transform.translation.y -= 100;
         }
         direction = 2;
         SetDrawable(m_Image);
     } else if (Util::Input::IsKeyDown(Util::Keycode::UP)) {
-        if (m_Transform.translation.y + 75 <= 300) {
-            m_Transform.translation.y += 75;
+        if (m_Transform.translation.y + 100 <= 200) {
+            m_Transform.translation.y += 100;
         }
         direction = 8;
         SetDrawable(m_Image);
     } else if (Util::Input::IsKeyDown(Util::Keycode::LEFT)) {
-        if (m_Transform.translation.x - 75 >= -600) {
-            m_Transform.translation.x -= 75;
+        if (m_Transform.translation.x - 100 >= -450) {
+            m_Transform.translation.x -= 100;
         }
         direction = 4;
-        m_Transform.scale.x = -0.7f;
+        m_Transform.scale.x = -1.0f;
         SetDrawable(m_Image);
     } else if (Util::Input::IsKeyDown(Util::Keycode::RIGHT)) {
-        if (m_Transform.translation.x + 75 <= 600) {
-            m_Transform.translation.x += 75;
+        if (m_Transform.translation.x + 100 <= 350) {
+            m_Transform.translation.x += 100;
         }
         direction = 6;
-        m_Transform.scale.x = 0.7f;
+        m_Transform.scale.x = 1.0f;
         SetDrawable(m_Image);
     }
 
@@ -61,18 +61,18 @@ void man::Update(const std::vector<std::shared_ptr<Box>>& boxes, int phase)
             if (impact.CheckBoxCollision(box->GetPosition(), boxPositions, direction , phase)) {
                 // 還原角色位置
                 switch (direction) {
-                case 8: m_Transform.translation.y -= 75; break;
-                case 2: m_Transform.translation.y += 75; break;
-                case 4: m_Transform.translation.x += 75; break;
-                case 6: m_Transform.translation.x -= 75; break;
+                case 8: m_Transform.translation.y -= 100; break;
+                case 2: m_Transform.translation.y += 100; break;
+                case 4: m_Transform.translation.x += 100; break;
+                case 6: m_Transform.translation.x -= 100; break;
                 }
             } else {
                 // 更新箱子位置
                 switch (direction) {
-                case 8: box->m_Transform.translation.y += 75; break;
-                case 2: box->m_Transform.translation.y -= 75; break;
-                case 4: box->m_Transform.translation.x -= 75; break;
-                case 6: box->m_Transform.translation.x += 75; break;
+                case 8: box->m_Transform.translation.y += 100; break;
+                case 2: box->m_Transform.translation.y -= 100; break;
+                case 4: box->m_Transform.translation.x -= 100; break;
+                case 6: box->m_Transform.translation.x += 100; break;
                 }
             }
         }

@@ -35,7 +35,6 @@ add_executable(${PROJECT_NAME}
     ${SRC_DIR}/main.cpp
     ${SRC_FILES}
     ${HEADER_FILES}
-        src/AppRender.cpp
         src/Stage.cpp
         src/Box.cpp
         src/Target.cpp

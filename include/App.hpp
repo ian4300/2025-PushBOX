@@ -12,6 +12,7 @@ class Stage : public Util::GameObject {
 public:
     Stage();
     void Update();
+    void SetBackgroundImage(const std::string& imagePath);
 
 private:
     std::shared_ptr<Util::Image> m_BackgroundImage;
@@ -70,8 +71,6 @@ public:
     void Update();
 
     void End();
-
-    void Render();
 
 private:
     void ValidTask();
