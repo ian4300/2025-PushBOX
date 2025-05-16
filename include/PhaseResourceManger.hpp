@@ -13,6 +13,7 @@ public:
     }
 */
     void NextPhase();
+    void Reset();
     int GetPhase() const;
 
 private:

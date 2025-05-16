@@ -66,7 +66,6 @@ void man::Update(const std::vector<std::shared_ptr<Box>>& boxes, int phase)
                 case 4: m_Transform.translation.x += 75; break;
                 case 6: m_Transform.translation.x -= 75; break;
                 }
-                SDL_Log("Invalid position detected!");
             } else {
                 // 更新箱子位置
                 switch (direction) {
@@ -75,20 +74,20 @@ void man::Update(const std::vector<std::shared_ptr<Box>>& boxes, int phase)
                 case 4: box->m_Transform.translation.x -= 75; break;
                 case 6: box->m_Transform.translation.x += 75; break;
                 }
-                SDL_Log("Box moved!");
             }
         }
     }
 }
 void App::Update()
 {
-    int finishtarget[6] = {0, 0, 0, 0, 0};
+    int sum = 0;
     std::vector<std::shared_ptr<Box>> boxes = {m_box1, m_box2, m_box3, m_box4, m_box5};
     // 收集所有箱子的座標
     m_man->Update(boxes,m_PRM.GetPhase());
     m_Stage->Update();
     m_Root.Update();
-    // 切換關卡
+
+    //第一關
     if (m_PRM.GetPhase() == 1)
     {
         if (m_target1->m_Transform.translation == m_box1->m_Transform.translation) {
@@ -96,54 +95,84 @@ void App::Update()
         }
 
     }
+    //第二關
     if (m_PRM.GetPhase() == 2)
     {
-        glm::vec2 manPosition = m_man->GetPosition();
-        if (manPosition.x == 0 && manPosition.y == -150) {
+        //目標1判別
+        for (const auto& box : boxes) {
+            if (m_target1->m_Transform.translation == box->GetPosition()) {
+                finishtarget[0] = 1;
+                break; // 找到匹配後即可跳出迴圈
+            }
+            else
+                finishtarget[0] = 0;
+        }
+        //目標2判別
+        for (const auto& box : boxes) {
+            if (m_target2->m_Transform.translation == box->GetPosition()) {
+                finishtarget[1] = 1;
+                break; // 找到匹配後即可跳出迴圈
+            }
+            else
+                finishtarget[1] = 0;
+        }
+        //總和判別
+        for (int value : finishtarget)
+        {
+            sum += value;
+        }
+        if (sum == 2)
+        {
             m_CurrentState = State::START;
         }
     }
+    //第三關
     if (m_PRM.GetPhase() == 3)
     {
-        glm::vec2 manPosition = m_man->GetPosition();
-        if (manPosition.x == -225 && manPosition.y == 0) {
-            m_CurrentState = State::START;
-        }
-    }
-    /*// 處理箱子推動邏輯
-    for (auto& box : m_boxes) {
-        if (box.IsCollidingWith(m_man)) {
-            box.Move(manPosition); // 假設 Box 類有 Move 方法
-        }
-    }
-*/
-    /*
-    // 檢查是否完成關卡
-    bool allBoxesOnTargets = true;
-    for (const auto& box : m_boxes) {
-        bool boxOnTarget = false;
-        for (const auto& target : m_targets) {
-            if (box.GetPosition() == target.GetPosition()) {
-                boxOnTarget = true;
-                break;
+        //目標1判別
+        for (const auto& box : boxes) {
+            if (m_target1->m_Transform.translation == box->GetPosition()) {
+                finishtarget[0] = 1;
+                break; // 找到匹配後即可跳出迴圈
             }
+            else
+                finishtarget[0] = 0;
         }
-        if (!boxOnTarget) {
-            allBoxesOnTargets = false;
-            break;
+        //目標2判別
+        for (const auto& box : boxes) {
+            if (m_target2->m_Transform.translation == box->GetPosition()) {
+                finishtarget[1] = 1;
+                break; // 找到匹配後即可跳出迴圈
+            }
+            else
+                finishtarget[1] = 0;
+        }
+        //目標3判別
+        for (const auto& box : boxes) {
+            if (m_target3->m_Transform.translation == box->GetPosition()) {
+                finishtarget[2] = 1;
+                break; // 找到匹配後即可跳出迴圈
+            }
+            else
+                finishtarget[2] = 0;
+        }
+        //總和判別
+        for (int value : finishtarget)
+        {
+            sum += value;
+        }
+        if (sum == 3)
+        {
+            m_CurrentState = State::START;
         }
     }
 
-    if (allBoxesOnTargets) {
-        m_Phase++;
-        if (m_Phase > 3) {
-            m_CurrentState = State::END;
-        } else {
-            m_CurrentState = State::START; // 切換到 START 狀態以初始化下一關
-        }
-    }
-*/
     // 跳轉至結束階段
+    if (Util::Input::IsKeyUp(Util::Keycode::R) || Util::Input::IfExit())
+    {
+        m_PRM.Reset();
+        m_CurrentState = State::START;
+    }
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit())
     {
         m_CurrentState = State::END;

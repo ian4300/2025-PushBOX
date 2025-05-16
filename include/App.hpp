@@ -75,6 +75,8 @@ public:
 
 private:
     void ValidTask();
+    int finishtarget[6] = {0, 0, 0, 0, 0};
+
     PhaseResourceManger m_PRM;
     enum class Phase {
         CHANGE_CHARACTER_IMAGE,
@@ -97,6 +99,10 @@ private:
     std::shared_ptr<Box> m_box5 = std::make_shared<Box>();
 
     std::shared_ptr<Target> m_target1 = std::make_shared<Target>();
+    std::shared_ptr<Target> m_target2 = std::make_shared<Target>();
+    std::shared_ptr<Target> m_target3 = std::make_shared<Target>();
+    std::shared_ptr<Target> m_target4 = std::make_shared<Target>();
+    std::shared_ptr<Target> m_target5 = std::make_shared<Target>();
 
     bool m_EnterDown = false;
 };
