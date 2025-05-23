@@ -15,38 +15,113 @@ man::man()
 
 void man::Update(const std::vector<std::shared_ptr<Box>>& boxes, int phase)
 {
-    Impact impact;
     int direction = 0;
-
+    Impact impact;
     // 移動邏輯
-    if (Util::Input::IsKeyDown(Util::Keycode::DOWN)) {
-        if (m_Transform.translation.y - 100 >= -200) {
-            m_Transform.translation.y -= 100;
+    if (phase <= 6)
+    {
+        //下判定
+        if (Util::Input::IsKeyDown(Util::Keycode::DOWN)) {
+            if (m_Transform.translation.x > -350 && m_Transform.translation.x < 250)
+            {
+                if (m_Transform.translation.y - 100 >= -200)
+                {
+                    m_Transform.translation.y -= 100;
+                }
+            }
+            else
+            {
+                if (m_Transform.translation.y - 100 >= -100)
+                    m_Transform.translation.y -= 100;
+            }
+            direction = 2;
+            SetDrawable(m_Image);
         }
-        direction = 2;
-        SetDrawable(m_Image);
-    } else if (Util::Input::IsKeyDown(Util::Keycode::UP)) {
-        if (m_Transform.translation.y + 100 <= 200) {
-            m_Transform.translation.y += 100;
+        //上判定
+        else if (Util::Input::IsKeyDown(Util::Keycode::UP)) {
+            if (m_Transform.translation.x == 350)
+            {
+                if (m_Transform.translation.y + 100 <= 0) {
+                    m_Transform.translation.y += 100;
+                }
+            }
+            else if (m_Transform.translation.x == 250 || m_Transform.translation.x == 150 || m_Transform.translation.x == -250)
+            {
+                if (m_Transform.translation.y + 100 <= 100) {
+                    m_Transform.translation.y += 100;
+                }
+            }
+            else if (m_Transform.translation.x >= -350 && m_Transform.translation.x <= 50 && m_Transform.translation.x != -250)
+            {
+                if (m_Transform.translation.y + 100 <= 200) {
+                    m_Transform.translation.y += 100;
+                }
+            }
+            direction = 8;
+            SetDrawable(m_Image);
         }
-        direction = 8;
-        SetDrawable(m_Image);
-    } else if (Util::Input::IsKeyDown(Util::Keycode::LEFT)) {
-        if (m_Transform.translation.x - 100 >= -450) {
-            m_Transform.translation.x -= 100;
+        //左判定
+        else if (Util::Input::IsKeyDown(Util::Keycode::LEFT)) {
+            if (m_Transform.translation.y == 200)
+            {
+                if (m_Transform.translation.x - 100 != -250 && m_Transform.translation.x - 100 >= -350)
+                {
+                    m_Transform.translation.x -= 100;
+                }
+            }
+            else if (m_Transform.translation.y >= -100 && m_Transform.translation.y <= 100)
+            {
+                if (m_Transform.translation.x - 100 >= -350)
+                {
+                    m_Transform.translation.x -= 100;
+                }
+            }
+            else if (m_Transform.translation.y == -200)
+            {
+                if (m_Transform.translation.x - 100 >= -250)
+                {
+                    m_Transform.translation.x -= 100;
+                }
+            }
+            direction = 4;
+            m_Transform.scale.x = -1.0f;
+            SetDrawable(m_Image);
         }
-        direction = 4;
-        m_Transform.scale.x = -1.0f;
-        SetDrawable(m_Image);
-    } else if (Util::Input::IsKeyDown(Util::Keycode::RIGHT)) {
-        if (m_Transform.translation.x + 100 <= 350) {
-            m_Transform.translation.x += 100;
+        //右判定
+        else if (Util::Input::IsKeyDown(Util::Keycode::RIGHT)) {
+            if (m_Transform.translation.y == 200)
+            {
+                if (m_Transform.translation.x + 100 <= 50 && m_Transform.translation.x + 100 != -250)
+                {
+                    m_Transform.translation.x += 100;
+                }
+            }
+            else if (m_Transform.translation.y == 100)
+            {
+                if (m_Transform.translation.x + 100 <= 250)
+                {
+                    m_Transform.translation.x += 100;
+                }
+            }
+            else if (m_Transform.translation.y == -200)
+            {
+                if (m_Transform.translation.x + 100 <= 150)
+                {
+                    m_Transform.translation.x += 100;
+                }
+            }
+            else if (m_Transform.translation.y == 0 || m_Transform.translation.y == -100)
+            {
+                if (m_Transform.translation.x + 100 <= 350)
+                {
+                    m_Transform.translation.x += 100;
+                }
+            }
+            direction = 6;
+            m_Transform.scale.x = 1.0f;
+            SetDrawable(m_Image);
         }
-        direction = 6;
-        m_Transform.scale.x = 1.0f;
-        SetDrawable(m_Image);
     }
-
     glm::vec2 newPosition = m_Transform.translation;
 
     // 提取箱子座標

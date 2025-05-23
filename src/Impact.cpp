@@ -25,7 +25,26 @@ bool Impact::CheckBoxCollision(const glm::vec2& currentBoxPosition, const std::v
             newBoxPosition.y < -200 || newBoxPosition.y > 200) {
             return true; // 無效位置
             }
-
+        else if (newBoxPosition.y == 200)
+        {
+            if (newBoxPosition.x >= 150 || newBoxPosition.x == -250)
+           {return true;}
+        }
+        else if (newBoxPosition.y == 100)
+        {
+            if (newBoxPosition.x > 250)
+            {return true;}
+        }
+        else if (newBoxPosition.y == 0 || newBoxPosition.y == -100)
+        {
+            if (newBoxPosition.x > 350 || newBoxPosition.x < -350)
+            {return true;}
+        }
+        else if (newBoxPosition.y == -200)
+        {
+            if (newBoxPosition.x >= 250 || newBoxPosition.x <= -350)
+            {return true;}
+        }
         // 檢測是否與其他箱子碰撞
         for (const auto& otherBox : otherBoxes) {
             if (newBoxPosition == otherBox) {
