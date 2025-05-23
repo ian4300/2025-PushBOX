@@ -8,7 +8,7 @@ man::man()
     : m_Image(std::make_shared<Util::Image>("Resources/character1.png"))
     {
         m_Transform.scale = {1.0f, 1.0f};
-        m_Transform.translation = {50, 0};
+        m_Transform.translation = {0, 0};
         SetDrawable(m_Image); // 設置單一圖片
         SetZIndex(5);
 }
@@ -241,13 +241,125 @@ void App::Update()
             m_CurrentState = State::START;
         }
     }
+    //第四關
+    if (m_PRM.GetPhase() == 4)
+    {
+        //目標1判別
+        for (const auto& box : boxes) {
+            if (m_target1->m_Transform.translation == box->GetPosition()) {
+                finishtarget[0] = 1;
+                break; // 找到匹配後即可跳出迴圈
+            }
+            else
+                finishtarget[0] = 0;
+        }
+        //目標2判別
+        for (const auto& box : boxes) {
+            if (m_target2->m_Transform.translation == box->GetPosition()) {
+                finishtarget[1] = 1;
+                break; // 找到匹配後即可跳出迴圈
+            }
+            else
+                finishtarget[1] = 0;
+        }
+        //目標3判別
+        for (const auto& box : boxes) {
+            if (m_target3->m_Transform.translation == box->GetPosition()) {
+                finishtarget[2] = 1;
+                break; // 找到匹配後即可跳出迴圈
+            }
+            else
+                finishtarget[2] = 0;
+        }
+        //目標4判別
+        for (const auto& box : boxes) {
+            if (m_target4->m_Transform.translation == box->GetPosition()) {
+                finishtarget[3] = 1;
+                break; // 找到匹配後即可跳出迴圈
+            }
+            else
+                finishtarget[3] = 0;
+        }
+        //總和判別
+        for (int value : finishtarget)
+        {
+            sum += value;
+        }
+        if (sum == 4)
+        {
+            m_CurrentState = State::START;
+        }
+    }
+    //第四關
+    if (m_PRM.GetPhase() == 5)
+    {
+        //目標1判別
+        for (const auto& box : boxes) {
+            if (m_target1->m_Transform.translation == box->GetPosition()) {
+                finishtarget[0] = 1;
+                break; // 找到匹配後即可跳出迴圈
+            }
+            else
+                finishtarget[0] = 0;
+        }
+        //目標2判別
+        for (const auto& box : boxes) {
+            if (m_target2->m_Transform.translation == box->GetPosition()) {
+                finishtarget[1] = 1;
+                break; // 找到匹配後即可跳出迴圈
+            }
+            else
+                finishtarget[1] = 0;
+        }
+        //目標3判別
+        for (const auto& box : boxes) {
+            if (m_target3->m_Transform.translation == box->GetPosition()) {
+                finishtarget[2] = 1;
+                break; // 找到匹配後即可跳出迴圈
+            }
+            else
+                finishtarget[2] = 0;
+        }
+        //目標4判別
+        for (const auto& box : boxes) {
+            if (m_target4->m_Transform.translation == box->GetPosition()) {
+                finishtarget[3] = 1;
+                break; // 找到匹配後即可跳出迴圈
+            }
+            else
+                finishtarget[3] = 0;
+        }
+        //目標4判別
+        for (const auto& box : boxes) {
+            if (m_target5->m_Transform.translation == box->GetPosition()) {
+                finishtarget[4] = 1;
+                break; // 找到匹配後即可跳出迴圈
+            }
+            else
+                finishtarget[4] = 0;
+        }
+        //總和判別
+        for (int value : finishtarget)
+        {
+            sum += value;
+        }
+        if (sum == 5)
+        {
+            m_CurrentState = State::START;
+        }
+    }
 
-    // 跳轉至結束階段
+    //重設
     if (Util::Input::IsKeyUp(Util::Keycode::R) || Util::Input::IfExit())
     {
         m_PRM.Reset();
         m_CurrentState = State::START;
     }
+    if (Util::Input::IsKeyUp(Util::Keycode::K) || Util::Input::IfExit())
+    {
+        m_CurrentState = State::START;
+    }
+    // 跳轉至結束階段
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit())
     {
         m_CurrentState = State::END;
