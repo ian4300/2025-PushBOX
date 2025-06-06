@@ -17,8 +17,8 @@ void man::Update(const std::vector<std::shared_ptr<Box>>& boxes, int phase)
 {
     int direction = 0;
     Impact impact;
-    // 移動邏輯
-    if (phase <= 6)
+    // 第一章地圖移動邏輯
+   /* if (phase <= 6)
     {
         //下判定
         if (Util::Input::IsKeyDown(Util::Keycode::DOWN)) {
@@ -121,7 +121,275 @@ void man::Update(const std::vector<std::shared_ptr<Box>>& boxes, int phase)
             m_Transform.scale.x = 1.0f;
             SetDrawable(m_Image);
         }
+    }*/
+    //第二張地圖移動邏輯
+    /*else if (phase > 6 && phase <= 12)
+    {
+        //下判定
+        if (Util::Input::IsKeyDown(Util::Keycode::DOWN)) {
+            if (m_Transform.translation.y - 100 >= -300 && m_Transform.translation.y - 100 != -100 && m_Transform.translation.x != 150)
+            {
+                m_Transform.translation.y -= 100;
+            }
+            else
+            {
+                if (m_Transform.translation.y - 100 == 0)
+                {
+                    if (m_Transform.translation.x != 150)
+                    {m_Transform.translation.y -= 100;}
+                }
+                else if (m_Transform.translation.y -100 == -100)
+                {
+                    if (m_Transform.translation.x <= -250)
+                    {m_Transform.translation.y -= 100;}
+                }
+            }
+            direction = 2;
+            SetDrawable(m_Image);
+        }
+         //上判定
+        else if (Util::Input::IsKeyDown(Util::Keycode::UP)) {
+            if (m_Transform.translation.x <= 150 && m_Transform.translation.x >= -150 && m_Transform.translation.y <= 0)
+            {
+                if (m_Transform.translation.y + 100 != -100) {
+                    m_Transform.translation.y += 100;
+                }
+            }
+            else if (m_Transform.translation.x == -350)
+            {
+                if (m_Transform.translation.y + 100 != 0) {
+                    m_Transform.translation.y += 100;
+                }
+            }
+            else if (m_Transform.translation.x >= -250 && m_Transform.translation.x <= -50 && m_Transform.translation.y > 0)
+            {
+                if (m_Transform.translation.y + 100 != 200) {
+                    m_Transform.translation.y += 100;
+                }
+            }
+            else if(m_Transform.translation.x == -250)
+            {
+                if (m_Transform.translation.y + 100 != 200) {
+                    m_Transform.translation.y += 100;
+                }
+            }
+            else if (m_Transform.translation.x >= 50 && m_Transform.translation.x <= 150 && m_Transform.translation.y > 0)
+            {
+                if (m_Transform.translation.y + 100 != 300) {
+                    m_Transform.translation.y += 100;
+                }
+            }
+            direction = 8;
+            SetDrawable(m_Image);
+        }
+        //左判定
+        else if (Util::Input::IsKeyDown(Util::Keycode::LEFT)) {
+            if (m_Transform.translation.y == 200)
+            {
+                if (m_Transform.translation.x -100 >= 50)
+                {
+                    m_Transform.translation.x -= 100;
+                }
+            }
+            if (m_Transform.translation.y <= 100 && m_Transform.translation.y >= 0)
+            {
+                if (m_Transform.translation.x -100 >= -250)
+                {
+                    m_Transform.translation.x -= 100;
+                }
+            }
+            if (m_Transform.translation.y <= -100)
+            {
+                if (m_Transform.translation.x -100 >= -350)
+                {
+                    m_Transform.translation.x -= 100;
+                }
+            }
+            direction = 4;
+            m_Transform.scale.x = -1.0f;
+            SetDrawable(m_Image);
+        }
+        //右判定
+        else if (Util::Input::IsKeyDown(Util::Keycode::RIGHT)) {
+            if (m_Transform.translation.y <= 200 && m_Transform.translation.y >= 100)
+            {
+                if (m_Transform.translation.x + 100 <= 150)
+                {
+                    m_Transform.translation.x += 100;
+                }
+            }
+            else if (m_Transform.translation.y == 0)
+            {
+                if (m_Transform.translation.x + 100 <= 50)
+                {
+                    m_Transform.translation.x += 100;
+                }
+            }
+            else if (m_Transform.translation.y == -100)
+            {
+                if (m_Transform.translation.x + 100 <= -250)
+                {
+                    m_Transform.translation.x += 100;
+                }
+            }
+            else if (m_Transform.translation.y == -200)
+            {
+                if (m_Transform.translation.x + 100 <= 150)
+                {
+                    m_Transform.translation.x += 100;
+                }
+            }
+            else if (m_Transform.translation.y == -300)
+            {
+                if (m_Transform.translation.x + 100 <= 250)
+                {
+                    m_Transform.translation.x += 100;
+                }
+            }
+            direction = 6;
+            m_Transform.scale.x = 1.0f;
+            SetDrawable(m_Image);
+        }
+    }*/
+    //第三張地圖移動邏輯
+    if (/*phase > 12 && phase <= 18*/phase <= 6)
+    {
+        //下判定
+        if (Util::Input::IsKeyDown(Util::Keycode::DOWN)) {
+            if (m_Transform.translation.x == -250 || m_Transform.translation.x == -50)
+            {
+                if (m_Transform.translation.y - 100 >= -200)
+                {
+                    m_Transform.translation.y -= 100;
+                }
+            }
+            else if (m_Transform.translation.x == -150)
+            {
+                if (m_Transform.translation.y - 100 != -100 && m_Transform.translation.y - 100 >= -200)
+                {
+                    m_Transform.translation.y -= 100;
+                }
+            }
+            else if (m_Transform.translation.x == 50 || m_Transform.translation.x == 150)
+            {
+                if (m_Transform.translation.y - 100 >= -400)
+                {
+                    m_Transform.translation.y -= 100;
+                }
+            }
+            direction = 2;
+            SetDrawable(m_Image);
+        }
+         //上判定
+        else if (Util::Input::IsKeyDown(Util::Keycode::UP)) {
+            if (m_Transform.translation.x == -250 || m_Transform.translation.x == -50)
+            {
+                if (m_Transform.translation.y + 100 <= 300)
+                {
+                    m_Transform.translation.y += 100;
+                }
+            }
+            else if (m_Transform.translation.x == -150)
+            {
+                if (m_Transform.translation.y + 100 != -100 && m_Transform.translation.y + 100 <= 300)
+                {
+                    m_Transform.translation.y += 100;
+                }
+            }
+            else if (m_Transform.translation.x == 50)
+            {
+                if (m_Transform.translation.y + 100 <= 0)
+                {
+                    m_Transform.translation.y += 100;
+                }
+            }
+            else if (m_Transform.translation.x == 150)
+            {
+                if (m_Transform.translation.y + 100 <= -100)
+                {
+                    m_Transform.translation.y += 100;
+                }
+            }
+            direction = 8;
+            SetDrawable(m_Image);
+        }
+        //左判定
+        else if (Util::Input::IsKeyDown(Util::Keycode::LEFT)) {
+            if (m_Transform.translation.y != 100 && m_Transform.translation.y != -100 && m_Transform.translation.y >= -200)
+            {
+                if (m_Transform.translation.x - 100 >= -250)
+                {
+                    m_Transform.translation.x -= 100;
+                }
+            }
+            else if (m_Transform.translation.y == 100)
+            {
+                if (m_Transform.translation.x - 100 >= -350)
+                {
+                    m_Transform.translation.x -= 100;
+                }
+            }
+            else if (m_Transform.translation.y == -100)
+            {
+                if (m_Transform.translation.x - 100 != -150 && m_Transform.translation.x -100 >= -250)
+                {
+                    m_Transform.translation.x -= 100;
+                }
+            }
+            else if (m_Transform.translation.y <= -300)
+            {
+                if (m_Transform.translation.x - 100 >= 0)
+                {
+                    m_Transform.translation.x -= 100;
+                }
+            }
+            direction = 4;
+            m_Transform.scale.x = -1.0f;
+            SetDrawable(m_Image);
+        }
+        //右判定
+        else if (Util::Input::IsKeyDown(Util::Keycode::RIGHT)) {
+            if (m_Transform.translation.y >= 100)
+            {
+                if (m_Transform.translation.x + 100 <= -50)
+                {
+                    m_Transform.translation.x += 100;
+                }
+            }
+            else if (m_Transform.translation.y == 0)
+            {
+                if (m_Transform.translation.x + 100 <= 50)
+                {
+                    m_Transform.translation.x += 100;
+                }
+            }
+            else if (m_Transform.translation.y == -100 || m_Transform.translation.y == -300)
+            {
+                if (m_Transform.translation.x + 100 <= 250)
+                {
+                    if(m_Transform.translation.y == -100)
+                    {
+                        if (m_Transform.translation.x + 100 == -150)
+                        {
+                            m_Transform.translation.x -= 100;
+                        }
+                    }
+                    m_Transform.translation.x += 100;
+                }
+            }
+            else if (m_Transform.translation.y == -200 || m_Transform.translation.y == -400)
+            {
+                if (m_Transform.translation.x + 100 <= 150)
+                {
+                    m_Transform.translation.x += 100;
+                }
+            }
+            direction = 6;
+            m_Transform.scale.x = 1.0f;
+            SetDrawable(m_Image);
+        }
     }
+
     glm::vec2 newPosition = m_Transform.translation;
 
     // 提取箱子座標

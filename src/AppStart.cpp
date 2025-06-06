@@ -6,7 +6,7 @@
 
 void App::Start() {
     LOG_TRACE("Start");
-    if (m_PRM.GetPhase() <= 5)
+    if (m_PRM.GetPhase() <= 29)
     m_PRM.NextPhase();
     else
         m_CurrentState = State::END;
@@ -16,16 +16,16 @@ void App::Start() {
 
     // 根據 Phase 切換地圖
     int phase = m_PRM.GetPhase();
-    if (phase >= 7 && phase <= 12) {
-        m_Stage->SetBackgroundImage("Resources/map2.png");
+    if (phase >= 2 && phase <= 12) {
+        m_Stage->SetBackgroundImage("Resources/map2.png" , 7);
     } else if (phase >= 13 && phase <= 18) {
-        m_Stage->SetBackgroundImage("Resources/map3.png");
+        m_Stage->SetBackgroundImage("Resources/map3.png" , 13);
     } else if (phase >= 19 && phase <= 24) {
-        m_Stage->SetBackgroundImage("Resources/map4.png");
+        m_Stage->SetBackgroundImage("Resources/map4.png" , 19);
     } else if (phase >= 25 && phase <= 30) {
-        m_Stage->SetBackgroundImage("Resources/map5.png");
+        m_Stage->SetBackgroundImage("Resources/map5.png" , 25);
     }
-
+    //第一關初始化
     if (m_PRM.GetPhase() == 1)
     {
         m_Root.AddChild(m_man);
@@ -52,10 +52,10 @@ void App::Start() {
         m_target5->SetVisible(false);
 
         m_man->m_Transform.translation.x = 50;
-        m_man->m_Transform.translation.y = 0;//map2換為x=0,y=50
+        m_man->m_Transform.translation.y = 0;
 
         m_box1->m_Transform.translation.x = -50;
-        m_box1->m_Transform.translation.y = 100;
+        m_box1->m_Transform.translation.y = 0;
 
         m_target1->m_Transform.translation.x = 50;
         m_target1->m_Transform.translation.y = -200;
@@ -109,6 +109,7 @@ void App::Start() {
 
         m_CurrentState = State::UPDATE;
     }
+    //第四關初始化
     if (m_PRM.GetPhase() == 4)
     {
         //初始化人位置
@@ -138,6 +139,7 @@ void App::Start() {
 
         m_CurrentState = State::UPDATE;
     }
+    //第五關初始化
     if (m_PRM.GetPhase() == 5)
     {
         //初始化人位置
@@ -171,4 +173,99 @@ void App::Start() {
 
         m_CurrentState = State::UPDATE;
     }
+    //第六關初始化
+    if (m_PRM.GetPhase() == 6)
+    {
+        //初始化人位置
+        m_man->m_Transform.translation.x = -250;
+        m_man->m_Transform.translation.y = -200;
+        //初始化箱子1,2,3,4位置，顯示箱子5
+        m_box1->m_Transform.translation.x = -250;
+        m_box1->m_Transform.translation.y = 100;
+        m_box2->m_Transform.translation.x = 150;
+        m_box2->m_Transform.translation.y = 100;
+        m_box3->m_Transform.translation.x = 250;
+        m_box3->m_Transform.translation.y = -100;
+        m_box4->m_Transform.translation.x = -50;
+        m_box4->m_Transform.translation.y = -200;
+        m_box5->SetVisible(true);
+        m_box5->m_Transform.translation.x = 50;
+        m_box5->m_Transform.translation.y = 0;
+
+        //初始化目標1,2,3,4位置，顯示目標5
+        m_target1->m_Transform.translation.x = -350;
+        m_target1->m_Transform.translation.y = 200;
+        m_target2->m_Transform.translation.x = 250;
+        m_target2->m_Transform.translation.y = 100;
+        m_target3->m_Transform.translation.x = 350;
+        m_target3->m_Transform.translation.y = 0;
+        m_target4->m_Transform.translation.x = 50;
+        m_target4->m_Transform.translation.y = 200;
+        m_target5->SetVisible(true);
+        m_target5->m_Transform.translation.x = 150;
+        m_target5->m_Transform.translation.y = -200;
+
+        m_CurrentState = State::UPDATE;
+    }
+    //第七關初始化
+    if (m_PRM.GetPhase() == 7)
+    {
+        HideBoxesAndTargets();
+        m_man->m_Transform.translation.x = 50;
+        m_man->m_Transform.translation.y = 0;
+
+        m_box1->m_Transform.translation.x = -50;
+        m_box1->m_Transform.translation.y = 0;
+
+        m_target1->m_Transform.translation.x = 50;
+        m_target1->m_Transform.translation.y = -200;
+        m_CurrentState = State::UPDATE;
+    }
+    //第八關初始化
+    if (m_PRM.GetPhase() == 8)
+    {
+        m_man->m_Transform.translation.x = 250;
+        m_man->m_Transform.translation.y = -300;
+        //初始化箱子1,2位置，顯示箱子2
+        m_box1->m_Transform.translation.x = -150;
+        m_box1->m_Transform.translation.y = 100;
+        m_box2->SetVisible(true);
+        m_box2->m_Transform.translation.x = 50;
+        m_box2->m_Transform.translation.y = 100;
+        //初始化目標1,2位置，顯示目標2
+        m_target1->m_Transform.translation.x = 50;
+        m_target1->m_Transform.translation.y = -100;
+        m_target2->SetVisible(true);
+        m_target2->m_Transform.translation.x = 250;
+        m_target2->m_Transform.translation.y = 100;
+        m_CurrentState = State::UPDATE;
+    }
+}
+void App::HideBoxesAndTargets() {
+    m_box2->SetVisible(false);
+    m_box3->SetVisible(false);
+    m_box4->SetVisible(false);
+    m_box5->SetVisible(false);
+    m_target2->SetVisible(false);
+    m_target3->SetVisible(false);
+    m_target4->SetVisible(false);
+    m_target5->SetVisible(false);
+
+    m_box2->m_Transform.translation.x = 1000;
+    m_box2->m_Transform.translation.y = 1000;
+    m_box3->m_Transform.translation.x = 1000;
+    m_box3->m_Transform.translation.y = 1000;
+    m_box4->m_Transform.translation.x = 1000;
+    m_box4->m_Transform.translation.y = 1000;
+    m_box5->m_Transform.translation.x = 1000;
+    m_box5->m_Transform.translation.y = 1000;
+
+    m_target2->m_Transform.translation.x = 1000;
+    m_target2->m_Transform.translation.y = 1000;
+    m_target3->m_Transform.translation.x = 1000;
+    m_target3->m_Transform.translation.y = 1000;
+    m_target4->m_Transform.translation.x = 1000;
+    m_target4->m_Transform.translation.y = 1000;
+    m_target5->m_Transform.translation.x = 1000;
+    m_target5->m_Transform.translation.y = 1000;
 }

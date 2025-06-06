@@ -12,7 +12,7 @@ class Stage : public Util::GameObject {
 public:
     Stage();
     void Update();
-    void SetBackgroundImage(const std::string& imagePath);
+    void SetBackgroundImage(const std::string& imagePath, int phase);
 
 private:
     std::shared_ptr<Util::Image> m_BackgroundImage;
@@ -68,6 +68,8 @@ public:
 
     void Start();
 
+    void HideBoxesAndTargets();
+
     void Update();
 
     void End();
@@ -77,13 +79,7 @@ private:
     int finishtarget[6] = {0, 0, 0, 0, 0};
 
     PhaseResourceManger m_PRM;
-    enum class Phase {
-        CHANGE_CHARACTER_IMAGE,
-        ABLE_TO_MOVE,
-        COLLIDE_DETECTION,
-    };
     State m_CurrentState = State::START;
-    Phase m_Phase = Phase::CHANGE_CHARACTER_IMAGE;
 
     Util::Renderer m_Root;
 

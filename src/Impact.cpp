@@ -18,8 +18,8 @@ bool Impact::CheckBoxCollision(const glm::vec2& currentBoxPosition, const std::v
     case 6: newBoxPosition.x += 100; break; // 右
     }
 
-    // 檢測是否超出邊界
-    if (phase <= 6)
+    // 第一章地圖檢測是否超出邊界
+   /* if (phase <= 6)
     {
         if (newBoxPosition.x < -350 || newBoxPosition.x > 350 ||
             newBoxPosition.y < -200 || newBoxPosition.y > 200) {
@@ -45,11 +45,88 @@ bool Impact::CheckBoxCollision(const glm::vec2& currentBoxPosition, const std::v
             if (newBoxPosition.x >= 250 || newBoxPosition.x <= -350)
             {return true;}
         }
-        // 檢測是否與其他箱子碰撞
-        for (const auto& otherBox : otherBoxes) {
-            if (newBoxPosition == otherBox) {
-                return true; // 無效位置
-            }
+    }*/
+    //第二章地圖檢測是否超出邊界
+    /*if (phase > 6 && phase <= 12)
+    {
+       if (newBoxPosition.y >= 300 || newBoxPosition.y <= -400)
+       {return true;}
+       if (newBoxPosition.y == 200)
+       {
+           if (newBoxPosition.x <= -50 || newBoxPosition.x >= 250)
+           {return true;}
+       }
+       if (newBoxPosition.y == 100)
+       {
+            if (newBoxPosition.x <= -350 || newBoxPosition.x >= 250)
+            {return true;}
+       }
+       if (newBoxPosition.y == 0)
+       {
+            if (newBoxPosition.x <= -350 || newBoxPosition.x >= 150)
+            {return true;}
+       }
+       if (newBoxPosition.y == -100)
+       {
+            if (newBoxPosition.x <= -450 || newBoxPosition.x >= -150)
+            {return true;}
+       }
+       if (newBoxPosition.y == -200)
+       {
+            if (newBoxPosition.x <= -450 || newBoxPosition.x >= 250)
+            {return true;}
+       }
+       if (newBoxPosition.y == -300)
+       {
+            if (newBoxPosition.x <= -450 || newBoxPosition.x >= 350)
+            {return true;}
+       }
+    }*/
+    // 第三章地圖檢測是否超出邊界
+    if (/*phase > 12 && phase <= 18*/ phase <= 6)
+    {
+       if (newBoxPosition.y > 300 || newBoxPosition.y < -400)
+       {return true;}
+       if (newBoxPosition.y >= 200)
+       {
+           if (newBoxPosition.x < -250 || newBoxPosition.x > -50)
+           {return true;}
+       }
+       if (newBoxPosition.y == 100)
+       {
+            if (newBoxPosition.x < -350 || newBoxPosition.x > -50)
+            {return true;}
+       }
+       if (newBoxPosition.y == 0)
+       {
+            if (newBoxPosition.x < -250 || newBoxPosition.x > 50)
+            {return true;}
+       }
+       if (newBoxPosition.y == -100)
+       {
+            if (newBoxPosition.x < -250 || newBoxPosition.x > 250 || newBoxPosition.x == -150)
+            {return true;}
+       }
+       if (newBoxPosition.y == -200)
+       {
+            if (newBoxPosition.x < -250 || newBoxPosition.x > 150)
+            {return true;}
+       }
+       if (newBoxPosition.y == -300)
+       {
+            if (newBoxPosition.x < 0 || newBoxPosition.x > 250)
+            {return true;}
+       }
+       if (newBoxPosition.y == -400)
+       {
+            if (newBoxPosition.x < 0 || newBoxPosition.x > 150)
+            {return true;}
+       }
+    }
+    // 檢測是否與其他箱子碰撞
+    for (const auto& otherBox : otherBoxes) {
+        if (newBoxPosition == otherBox) {
+            return true; // 無效位置
         }
     }
     return false; // 位置有效
