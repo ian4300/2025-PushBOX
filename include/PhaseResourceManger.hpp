@@ -14,6 +14,7 @@ public:
 */
     void NextPhase();
     void Reset();
+    void Jump();
     int GetPhase() const;
 
 private:

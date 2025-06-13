@@ -272,6 +272,12 @@ void App::Update()
         m_PRM.Reset();
         m_CurrentState = State::START;
     }
+    //上一關
+    if (Util::Input::IsKeyUp(Util::Keycode::J) || Util::Input::IfExit())
+    {
+        m_PRM.Jump();
+        m_CurrentState = State::START;
+    }
     //跳過
     if (Util::Input::IsKeyUp(Util::Keycode::K) || Util::Input::IfExit())
     {

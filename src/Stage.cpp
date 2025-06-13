@@ -12,7 +12,9 @@ Stage::Stage()
 }
 void Stage::SetBackgroundImage(const std::string& imagePath, int phase) {
     m_BackgroundImage = std::make_shared<Util::Image>(imagePath);
-    if (phase == 7)
+    if (phase == 1)
+        m_Transform.translation = {0, 10};
+    else if (phase == 7)
         m_Transform.translation = {-50, -40};
     else if (phase == 13)
         m_Transform.translation = {-50, -35};

@@ -1,3 +1,4 @@
+#include "iostream"
 #include "PhaseResourceManger.hpp"
 #include "Util/Logger.hpp"
 
@@ -19,6 +20,10 @@ void PhaseResourceManger::Reset() {
     }
     else return;
     LOG_DEBUG("Passed! Next phase: {}", m_Phase);
+}
+void PhaseResourceManger::Jump()
+{
+
 }
 int PhaseResourceManger::GetPhase() const {
     return m_Phase;
