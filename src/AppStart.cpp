@@ -33,9 +33,12 @@ void App::Start() {
         m_Root.AddChild(m_man);
         m_Root.AddChild(m_Stage);
         m_Root.AddChild(m_StepCounter);
+        m_StepText = std::make_shared<GiraffeText>("PTSD/assets/fonts/Inter.ttf", 100);
         m_StepText->Start();
-        m_StepText->SetZIndex(2);
+        m_StepText->SetZIndex(8);
         m_Root.AddChild(m_StepText);
+        m_StepText->m_Transform.translation = { -530, -230 };
+        m_StepText->SetVisible(true);
 
         m_Root.AddChild(m_box1);
         m_Root.AddChild(m_box2);
@@ -66,7 +69,7 @@ void App::Start() {
         m_target1->m_Transform.translation.x = 50;
         m_target1->m_Transform.translation.y = -200;
 
-        step = 10;
+        step = 7;
 
         m_CurrentState = State::UPDATE;
     }
@@ -90,7 +93,7 @@ void App::Start() {
         m_target2->m_Transform.translation.x = 250;
         m_target2->m_Transform.translation.y = 100;
 
-        step = 15;
+        step = 19;
 
         m_CurrentState = State::UPDATE;
     }
@@ -118,6 +121,8 @@ void App::Start() {
         m_target3->SetVisible(true);
         m_target3->m_Transform.translation.x = -250;
         m_target3->m_Transform.translation.y = -200;
+
+        step = 30;
 
         m_CurrentState = State::UPDATE;
     }
@@ -149,6 +154,8 @@ void App::Start() {
         m_target4->SetVisible(true);
         m_target4->m_Transform.translation.x = -250;
         m_target4->m_Transform.translation.y = -200;
+
+        step = 55;
 
         m_CurrentState = State::UPDATE;
     }
@@ -184,6 +191,8 @@ void App::Start() {
         m_target5->SetVisible(true);
         m_target5->m_Transform.translation.x = 150;
         m_target5->m_Transform.translation.y = -200;
+
+        step = 40;
 
         m_CurrentState = State::UPDATE;
     }
@@ -225,6 +234,8 @@ void App::Start() {
         m_target5->m_Transform.translation.x = 150;
         m_target5->m_Transform.translation.y = -200;
 
+        step = 40;
+
         m_CurrentState = State::UPDATE;
     }
 
@@ -240,6 +251,9 @@ void App::Start() {
 
         m_target1->m_Transform.translation.x = 150;
         m_target1->m_Transform.translation.y = -200;
+
+        step = 15;
+
         m_CurrentState = State::UPDATE;
     }
     //第八關初始化
@@ -260,6 +274,9 @@ void App::Start() {
         m_target2->SetVisible(true);
         m_target2->m_Transform.translation.x = 250;
         m_target2->m_Transform.translation.y = -300;
+
+        step = 35;
+
         m_CurrentState = State::UPDATE;
     }
     //第九關初始化
@@ -286,6 +303,8 @@ void App::Start() {
         m_target3->SetVisible(true);
         m_target3->m_Transform.translation.x = 250;
         m_target3->m_Transform.translation.y = -300;
+
+        step = 45;
 
         m_CurrentState = State::UPDATE;
     }
@@ -317,6 +336,8 @@ void App::Start() {
         m_target4->SetVisible(true);
         m_target4->m_Transform.translation.x = 250;
         m_target4->m_Transform.translation.y = -300;
+
+        step = 35;
 
         m_CurrentState = State::UPDATE;
     }
@@ -352,6 +373,8 @@ void App::Start() {
         m_target5->SetVisible(true);
         m_target5->m_Transform.translation.x = 150;
         m_target5->m_Transform.translation.y = -200;
+
+        step = 55;
 
         m_CurrentState = State::UPDATE;
     }
@@ -393,6 +416,8 @@ void App::Start() {
         m_target5->m_Transform.translation.x = 150;
         m_target5->m_Transform.translation.y = -200;
 
+        step = 55;
+
         m_CurrentState = State::UPDATE;
     }
 
@@ -408,6 +433,9 @@ void App::Start() {
 
         m_target1->m_Transform.translation.x = 150;
         m_target1->m_Transform.translation.y = -200;
+
+        step = 20;
+
         m_CurrentState = State::UPDATE;
     }
     //第十四關初始化
@@ -429,6 +457,9 @@ void App::Start() {
         m_target2->SetVisible(true);
         m_target2->m_Transform.translation.x = 250;
         m_target2->m_Transform.translation.y = -300;
+
+        step = 23;
+
         m_CurrentState = State::UPDATE;
     }
     //第十五關初始化
@@ -455,6 +486,8 @@ void App::Start() {
         m_target3->SetVisible(true);
         m_target3->m_Transform.translation.x = -250;
         m_target3->m_Transform.translation.y = -200;
+
+        step = 20;
 
         m_CurrentState = State::UPDATE;
     }
@@ -486,6 +519,8 @@ void App::Start() {
         m_target4->SetVisible(true);
         m_target4->m_Transform.translation.x = -250;
         m_target4->m_Transform.translation.y = -200;
+
+        step = 50;
 
         m_CurrentState = State::UPDATE;
     }
@@ -521,6 +556,8 @@ void App::Start() {
         m_target5->SetVisible(true);
         m_target5->m_Transform.translation.x = 250;
         m_target5->m_Transform.translation.y = -300;
+
+        step = 68;
 
         m_CurrentState = State::UPDATE;
     }
@@ -562,6 +599,8 @@ void App::Start() {
         m_target5->m_Transform.translation.x = 250;
         m_target5->m_Transform.translation.y = -300;
 
+        step = 68;
+
         m_CurrentState = State::UPDATE;
     }
 
@@ -577,6 +616,9 @@ void App::Start() {
 
         m_target1->m_Transform.translation.x = -250;
         m_target1->m_Transform.translation.y = -300;
+
+        step = 7;
+
         m_CurrentState = State::UPDATE;
     }
     //第二十關初始化
@@ -597,6 +639,9 @@ void App::Start() {
         m_target2->SetVisible(true);
         m_target2->m_Transform.translation.x = 250;
         m_target2->m_Transform.translation.y = -100;
+
+        step = 20;
+
         m_CurrentState = State::UPDATE;
     }
     //第二十一關初始化
@@ -623,6 +668,8 @@ void App::Start() {
         m_target3->SetVisible(true);
         m_target3->m_Transform.translation.x = -250;
         m_target3->m_Transform.translation.y = -200;
+
+        step = 43;
 
         m_CurrentState = State::UPDATE;
     }
@@ -654,6 +701,8 @@ void App::Start() {
         m_target4->SetVisible(true);
         m_target4->m_Transform.translation.x = -250;
         m_target4->m_Transform.translation.y = -200;
+
+        step = 75;
 
         m_CurrentState = State::UPDATE;
     }
@@ -689,6 +738,8 @@ void App::Start() {
         m_target5->SetVisible(true);
         m_target5->m_Transform.translation.x = 250;
         m_target5->m_Transform.translation.y = -100;
+
+        step = 55;
 
         m_CurrentState = State::UPDATE;
     }
@@ -730,6 +781,8 @@ void App::Start() {
         m_target5->m_Transform.translation.x = 250;
         m_target5->m_Transform.translation.y = -100;
 
+        step = 55;
+
         m_CurrentState = State::UPDATE;
     }
 
@@ -745,6 +798,9 @@ void App::Start() {
 
         m_target1->m_Transform.translation.x = 150;
         m_target1->m_Transform.translation.y = -300;
+
+        step = 21;
+
         m_CurrentState = State::UPDATE;
     }
     //第二十六關初始化
@@ -766,6 +822,9 @@ void App::Start() {
         m_target2->SetVisible(true);
         m_target2->m_Transform.translation.x = -350;
         m_target2->m_Transform.translation.y = -300;
+
+        step = 35;
+
         m_CurrentState = State::UPDATE;
     }
     //第二十七關初始化
@@ -792,6 +851,8 @@ void App::Start() {
         m_target3->SetVisible(true);
         m_target3->m_Transform.translation.x = -350;
         m_target3->m_Transform.translation.y = -300;
+
+        step = 53;
 
         m_CurrentState = State::UPDATE;
     }
@@ -823,6 +884,8 @@ void App::Start() {
         m_target4->SetVisible(true);
         m_target4->m_Transform.translation.x = 250;
         m_target4->m_Transform.translation.y = -300;
+
+        step = 65;
 
         m_CurrentState = State::UPDATE;
     }
@@ -858,6 +921,8 @@ void App::Start() {
         m_target5->SetVisible(true);
         m_target5->m_Transform.translation.x = 250;
         m_target5->m_Transform.translation.y = -300;
+
+        step = 60;
 
         m_CurrentState = State::UPDATE;
     }
@@ -898,6 +963,8 @@ void App::Start() {
         m_target4->m_Transform.translation.y = 300;
         m_target5->m_Transform.translation.x = 250;
         m_target5->m_Transform.translation.y = -300;
+
+        step = 60;
 
         m_CurrentState = State::UPDATE;
     }

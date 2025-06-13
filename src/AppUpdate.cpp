@@ -13,7 +13,7 @@ void App::Update()
     m_man->Update(boxes,m_PRM.GetPhase());
     m_Stage->Update();
     m_StepCounter->Update();
-    m_StepText->Update(step);
+    m_StepText->m_Text->SetText(fmt::format("{}", step));
     m_Root.Update();
 
     //判負條件
