@@ -7,7 +7,6 @@
 #include "Util/Text.hpp"
 #include "PhaseResourceManger.hpp"
 #include "Util/GameObject.hpp"
-#include "../example/include/GiraffeText.hpp"
 ///
 class Stage : public Util::GameObject {
 public:
@@ -69,7 +68,24 @@ private:
     std::shared_ptr<Util::Image> m_StepCounterImage;
 };
 ///
-class App {
+class StepText : public Util::GameObject {
+public:
+
+    StepText() = default;         // 設置默認大小
+
+    ~StepText() override = default;
+
+    void Start();
+
+    void Update(int step);
+
+private:
+    std::shared_ptr<Util::Text> m_Text;
+};
+
+///
+class App
+{
 public:
     enum class State {
         START,
@@ -117,7 +133,7 @@ private:
 
     std::shared_ptr<StepCounter> m_StepCounter = std::make_shared<StepCounter>();
 
-    std::shared_ptr<GiraffeText> m_StepText = std::make_shared<GiraffeText>();
+    std::shared_ptr<StepText> m_StepText;
 
     std::shared_ptr<Box> m_box1 = std::make_shared<Box>();
     std::shared_ptr<Box> m_box2 = std::make_shared<Box>();

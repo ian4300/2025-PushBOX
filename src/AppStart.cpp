@@ -32,6 +32,10 @@ void App::Start() {
     {
         m_Root.AddChild(m_man);
         m_Root.AddChild(m_Stage);
+        m_Root.AddChild(m_StepCounter);
+        m_StepText->Start();
+        m_StepText->SetZIndex(2);
+        m_Root.AddChild(m_StepText);
 
         m_Root.AddChild(m_box1);
         m_Root.AddChild(m_box2);
