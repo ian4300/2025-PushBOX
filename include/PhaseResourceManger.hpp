@@ -1,8 +1,10 @@
 #ifndef PHASE_MANGER_HPP
 #define PHASE_MANGER_HPP
 
-#include "Util/GameObject.hpp"
-//#include "BackgroundImage.hpp"
+#include <memory>
+#include "App.hpp"
+
+class man;
 
 class PhaseResourceManger {
 public:
@@ -15,6 +17,8 @@ public:
     void NextPhase();
     void Reset();
     void Jump();
+    void Fail();
+    void Victory();
     int GetPhase() const;
 
 private:
@@ -22,6 +26,7 @@ private:
     std::shared_ptr<BackgroundImage> m_Background;
  */
     int m_Phase = 0;
+    std::shared_ptr<man> m_man;
 };
 
 

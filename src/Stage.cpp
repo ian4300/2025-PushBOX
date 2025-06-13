@@ -22,6 +22,9 @@ void Stage::SetBackgroundImage(const std::string& imagePath, int phase) {
         m_Transform.translation = {5, 15};
     else if (phase == 25)
         m_Transform.translation = {0, 10};
+    else if (phase == 31)
+        m_Transform.translation = {0, 0};
+
     SetDrawable(m_BackgroundImage);
 }
 void Stage::Update() {

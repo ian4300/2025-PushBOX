@@ -12,8 +12,16 @@ void App::Update()
     // 收集所有箱子的座標
     m_man->Update(boxes,m_PRM.GetPhase());
     m_Stage->Update();
+    m_StepCounter->Update();
     m_Root.Update();
 
+    //判負條件
+    if (step == 0)
+    {
+        m_PRM.Fail();
+        m_PRM.Reset();
+        m_CurrentState = State::START;
+    }
     //第一關
     if (m_PRM.GetPhase() == 1 || m_PRM.GetPhase() == 7 || m_PRM.GetPhase() == 13 || m_PRM.GetPhase() == 19 || m_PRM.GetPhase() == 25)
     {
@@ -259,6 +267,8 @@ void App::Update()
         }
     }
 
+
+
     //重設
     if (Util::Input::IsKeyUp(Util::Keycode::R) || Util::Input::IfExit())
     {
@@ -272,7 +282,7 @@ void App::Update()
         m_PRM.Reset();
         m_CurrentState = State::START;
     }
-    //上一關
+    //跳轉(未完成)
     if (Util::Input::IsKeyUp(Util::Keycode::J) || Util::Input::IfExit())
     {
         m_PRM.Jump();

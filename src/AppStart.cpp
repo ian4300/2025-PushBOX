@@ -1,21 +1,21 @@
 #include "App.hpp"
 #include "Util/Logger.hpp"
 #include "Util/Image.hpp"
+#include "thread"
+#include "chrono"
 #include "PhaseResourceManger.hpp"
 #include <SDL_image.h>
 
 void App::Start() {
-    LOG_TRACE("Start");
-    if (m_PRM.GetPhase() <= 29)
+
     m_PRM.NextPhase();
-    else
-        m_CurrentState = State::END;
+    int phase = m_PRM.GetPhase();
 
     // 將 finishtarget 陣列重置為 0
     std::fill(std::begin(finishtarget), std::end(finishtarget), 0);
-
+    if (phase > 30)
+        m_CurrentState = State::END;
     // 根據 Phase 切換地圖
-    int phase = m_PRM.GetPhase();
     if (phase <= 6) {
         m_Stage->SetBackgroundImage("Resources/map1.png" , 1);
     } else if (phase > 6 && phase <= 12) {
@@ -24,7 +24,7 @@ void App::Start() {
         m_Stage->SetBackgroundImage("Resources/map3.png" , 13);
     } else if (phase > 18 && phase <= 24) {
         m_Stage->SetBackgroundImage("Resources/map4.png" , 19);
-    } else if (phase > 24 && phase <= 30) {
+    } else if (phase > 24 && phase <= 30){
         m_Stage->SetBackgroundImage("Resources/map5.png" , 25);
     }
     //第一關初始化
@@ -62,6 +62,8 @@ void App::Start() {
         m_target1->m_Transform.translation.x = 50;
         m_target1->m_Transform.translation.y = -200;
 
+        step = 10;
+
         m_CurrentState = State::UPDATE;
     }
     //第二關初始化
@@ -83,6 +85,8 @@ void App::Start() {
         m_target2->SetVisible(true);
         m_target2->m_Transform.translation.x = 250;
         m_target2->m_Transform.translation.y = 100;
+
+        step = 15;
 
         m_CurrentState = State::UPDATE;
     }
@@ -931,6 +935,4 @@ void App::HideBoxesAndTargets() {
         m_target5->m_Transform.translation.x = 1000;
         m_target5->m_Transform.translation.y = 1000;
     }
-
-
 }

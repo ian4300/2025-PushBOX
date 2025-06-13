@@ -40,6 +40,7 @@ add_executable(${PROJECT_NAME}
         src/Target.cpp
         src/Impact.cpp
         src/man.cpp
+        src/StepCounter.cpp
 )
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /W4)
