@@ -39,6 +39,7 @@ add_executable(${PROJECT_NAME}
         src/Box.cpp
         src/Target.cpp
         src/Impact.cpp
+        src/man.cpp
 )
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /W4)
