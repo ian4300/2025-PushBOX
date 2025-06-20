@@ -25,12 +25,12 @@ void PhaseResourceManger::Victory()
     if (m_man)
     {
         // 切換到勝利圖片
-        m_man->SetImage("Resources/Victory.png");
+        m_man->SetImage("../Resources/Victory.png");
 
         // 等待 5 秒
         std::this_thread::sleep_for(std::chrono::seconds(5));
     }
-    m_man->SetImage("Resources/character1.png");
+    m_man->SetImage("../Resources/character1.png");
 }
 void PhaseResourceManger::Jump()
 {

@@ -3,7 +3,7 @@
 #include "Util/Renderer.hpp"
 
 Stage::Stage()
-    : m_BackgroundImage(std::make_shared<Util::Image>("Resources/map1.png")){
+    : m_BackgroundImage(std::make_shared<Util::Image>("../Resources/map1.png")){
     m_Transform.translation = {0, 10}; // 初始化位置0,10
     m_Transform.scale = {1.00f, 0.95f};
 

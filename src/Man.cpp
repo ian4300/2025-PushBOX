@@ -4,7 +4,7 @@
 #include "Util/Image.hpp"
 
 man::man(App& app)
-    : m_App(app), m_Image(std::make_shared<Util::Image>("Resources/character1.png"))
+    : m_App(app), m_Image(std::make_shared<Util::Image>("../Resources/character1.png"))
 {
     m_Transform.scale = {1.0f, 1.0f};
     m_Transform.translation = {50, 0};

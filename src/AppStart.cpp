@@ -17,15 +17,15 @@ void App::Start() {
         m_CurrentState = State::END;
     // 根據 Phase 切換地圖
     if (phase <= 6) {
-        m_Stage->SetBackgroundImage("Resources/map1.png" , 1);
+        m_Stage->SetBackgroundImage("../Resources/map1.png" , 1);
     } else if (phase > 6 && phase <= 12) {
-        m_Stage->SetBackgroundImage("Resources/map2.png" , 7);
+        m_Stage->SetBackgroundImage("../Resources/map2.png" , 7);
     } else if (phase > 12 && phase <= 18) {
-        m_Stage->SetBackgroundImage("Resources/map3.png" , 13);
+        m_Stage->SetBackgroundImage("../Resources/map3.png" , 13);
     } else if (phase > 18 && phase <= 24) {
-        m_Stage->SetBackgroundImage("Resources/map4.png" , 19);
+        m_Stage->SetBackgroundImage("../Resources/map4.png" , 19);
     } else if (phase > 24 && phase <= 30){
-        m_Stage->SetBackgroundImage("Resources/map5.png" , 25);
+        m_Stage->SetBackgroundImage("../Resources/map5.png" , 25);
     }
     //第一關初始化
     if (m_PRM.GetPhase() == 1)
@@ -33,7 +33,7 @@ void App::Start() {
         m_Root.AddChild(m_man);
         m_Root.AddChild(m_Stage);
         m_Root.AddChild(m_StepCounter);
-        m_StepText = std::make_shared<GiraffeText>("PTSD/assets/fonts/Inter.ttf", 100);
+        m_StepText = std::make_shared<GiraffeText>("../PTSD/assets/fonts/Inter.ttf", 100);
         m_StepText->Start();
         m_StepText->SetZIndex(8);
         m_Root.AddChild(m_StepText);

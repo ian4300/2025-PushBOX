@@ -1,5 +1,7 @@
 #include "iostream"
 #include "App.hpp"
+#include <thread>
+#include <chrono>
 #include "Util/Input.hpp"
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"

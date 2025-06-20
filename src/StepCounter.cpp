@@ -7,7 +7,7 @@
 #include "Util/GameObject.hpp"
 
 StepCounter::StepCounter()
-    : m_StepCounterImage(std::make_shared<Util::Image>("Resources/counter.png")){
+    : m_StepCounterImage(std::make_shared<Util::Image>("../Resources/counter.png")){
     m_Transform.translation = {-515, -190};
     m_Transform.scale = {0.5f, 0.5f};
 

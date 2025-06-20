@@ -4,7 +4,7 @@
 #include "Util/Image.hpp"
 
 Target::Target()
-    : m_Image(std::make_shared<Util::Image>("Resources/point.png"))
+    : m_Image(std::make_shared<Util::Image>("../Resources/point.png"))
 {
     m_Transform.scale = {1.0f, 1.0f};
     m_Transform.translation = {1000, 1000};
